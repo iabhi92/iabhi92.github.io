@@ -252,6 +252,10 @@ body.vp-mobile .main-content, body.vp-compact .main-content { margin-left: 0; pa
 .project-dots .dot { width: 10px; height: 10px; }
 .project-file { font-size: .75rem; color: var(--text-secondary); display: inline-flex; align-items: center; gap: 7px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .project-body { padding: 20px; font-size: .74rem; line-height: 1.8; flex: 1; }
+.project-summary { color: var(--text-primary); margin-bottom: 14px; font-size: .8rem; line-height: 1.7; }
+.project-highlights { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.project-highlights li { position: relative; padding-left: 20px; color: var(--text-secondary); }
+.project-highlights li::before { content: ">"; position: absolute; left: 0; color: var(--neon-red); font-weight: 700; }
 .project-body .keyword { color: var(--code-keyword); } .project-body .string { color: var(--code-string); } .project-body .variable { color: var(--code-variable); } .project-body .function { color: var(--code-function); } .project-body .comment { color: var(--code-comment); font-style: italic; } .project-body .property { color: var(--code-property); } .project-body .number { color: var(--code-number); }
 .project-footer { padding: 16px 20px; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 12px; }
 .project-tags { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -285,6 +289,12 @@ body.vp-mobile .main-content, body.vp-compact .main-content { margin-left: 0; pa
 .blog-full p:last-child { margin-bottom: 0; }
 .blog-full strong { color: var(--neon-red); }
 .blog-full em { color: var(--neon-blue); font-style: normal; }
+.blog-section-label { padding: 14px 20px 4px; font-size: .72rem; color: var(--text-dim); letter-spacing: .03em; }
+.events-list { padding: 4px 10px 6px; }
+.event-entry { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding: 12px 14px; border-bottom: 1px solid rgba(48,54,61,.6); }
+.event-title { color: var(--text-primary); font-size: .82rem; font-weight: 600; }
+.event-meta { font-size: .68rem; color: var(--text-dim); }
+.event-desc { flex-basis: 100%; font-size: .78rem; color: var(--text-secondary); line-height: 1.7; margin-top: 2px; }
 
 /* PLAYGROUND TERMINAL */
 .fun-terminal { max-width: 760px; margin: 0 auto; background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015)), var(--bg-secondary); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; overflow: hidden; box-shadow: 0 22px 70px rgba(0,0,0,.35); transition: border-color .3s ease, box-shadow .3s ease; }
@@ -374,7 +384,7 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <div class="mobile-topbar">
-  <a href="#home" class="mobile-topbar-brand"><span class="logo-text neon-text">abhinav.dev</span></a>
+  <a href="#home" class="mobile-topbar-brand"><span class="logo-text neon-text">Abhinav Kumar</span></a>
   <span class="mobile-topbar-status"><span class="status-dot"></span>online</span>
   <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation" aria-expanded="false">
     <iconify-icon class="toggle-icon-open" icon="solar:hamburger-menu-bold"></iconify-icon>
@@ -386,7 +396,7 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
   <div class="sidebar-header">
     <a href="#home" class="sidebar-logo">
       <span class="logo-icon"><iconify-icon icon="solar:code-square-bold"></iconify-icon></span>
-      <span><span class="neon-text">abhinav</span>.dev<span class="logo-sub">full-stack &amp; security</span></span>
+      <span><span class="neon-text">abhinav</span> kumar</span>
     </a>
   </div>
   <nav class="sidebar-nav">
@@ -401,7 +411,6 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
     </ul>
   </nav>
   <div class="sidebar-footer">
-    <div class="sidebar-status"><span class="status-dot"></span><span>Open to full-stack &amp; security roles</span></div>
     <div class="sidebar-social">
       <a href="https://github.com/iabhi92" target="_blank" rel="noopener noreferrer" class="social-link" data-tooltip="GitHub" aria-label="GitHub"><iconify-icon icon="mdi:github"></iconify-icon></a>
       <a href="mailto:pinku2c@gmail.com" class="social-link" data-tooltip="Email" aria-label="Email"><iconify-icon icon="solar:letter-bold"></iconify-icon></a>
@@ -414,9 +423,9 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
   <!-- HERO -->
   <section class="hero-section" id="home">
     <div class="hero-text">
-      <div class="hero-chip"><iconify-icon icon="solar:bolt-bold"></iconify-icon> full-stack builder · security depth</div>
-      <h1>I build real software —<br><span class="line2">then break it until it's solid.</span></h1>
-      <p class="hero-sub">Three shipped products — RSA and Shor's algorithm from scratch, distributed hash-based threshold signatures, and a client-side encrypted task app — built by someone who's also spent real hours on CTF web exploitation and binary exploitation. Sydney, Australia.</p>
+      <div class="hero-chip"><iconify-icon icon="solar:map-point-bold"></iconify-icon> Sydney, Australia</div>
+      <h1>I build real software,<br><span class="line2">then spend just as long trying to break it.</span></h1>
+      <p class="hero-sub">I've shipped three working products: RSA broken from scratch and against real quantum hardware, a threshold-signature scheme built from a 2024 paper, and a task app that actually can't read your data. Outside of that, I do CTF work — mostly web and binary exploitation.</p>
       <div class="hero-btns">
         <a href="#projects" class="btn btn-primary"><iconify-icon icon="solar:folder-with-files-bold"></iconify-icon> See the work</a>
         <a href="#contact" class="btn btn-outline"><iconify-icon icon="solar:letter-bold"></iconify-icon> Get in touch</a>
@@ -545,7 +554,14 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
 
       <div class="project-card reveal">
         <div class="project-header"><div class="project-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div><span class="project-file"><iconify-icon icon="solar:atom-bold" style="font-size:.9rem;"></iconify-icon> shors-rsa-cracker.py</span></div>
-        <div class="project-body">RSA implemented from scratch, classical factoring attacks, a from-scratch quantum statevector simulator cross-validated against Google Cirq, and a real run submitted to actual IBM quantum hardware — an end-to-end demonstration of why (and when) quantum computing threatens RSA.</div>
+        <div class="project-body">
+          <p class="project-summary">RSA cracked three ways: by hand, classically, and on a real quantum computer.</p>
+          <ul class="project-highlights">
+            <li>Built a quantum statevector simulator from scratch and checked it bit-for-bit against Google Cirq</li>
+            <li>Ran actual period-finding on IBM quantum hardware, not just a simulator</li>
+            <li>Classical factoring attacks benchmarked side by side with the quantum approach</li>
+          </ul>
+        </div>
         <div class="project-footer">
           <div class="project-tags"><span class="tag-item">Python</span><span class="tag-item">React</span><span class="tag-item">FastAPI</span><span class="tag-item">Qiskit</span></div>
           <div class="project-links">
@@ -557,7 +573,14 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
 
       <div class="project-card reveal">
         <div class="project-header"><div class="project-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div><span class="project-file"><iconify-icon icon="solar:shield-star-bold" style="font-size:.9rem;"></iconify-icon> threshold_signatures.py</span></div>
-        <div class="project-body">An implementation of Kelsey, Lang &amp; Lucks (2024) — Winternitz one-time signatures, Merkle authentication trees, and a k-of-n threshold signing protocol — with every primitive computed live in the browser via a real multi-tab demo over BroadcastChannel, not simulated in one shared array.</div>
+        <div class="project-body">
+          <p class="project-summary">A working build of Kelsey, Lang &amp; Lucks' 2024 threshold-signature scheme, not just a write-up of it.</p>
+          <ul class="project-highlights">
+            <li>Winternitz one-time signatures and Merkle trees, no elliptic curves or RSA anywhere</li>
+            <li>k-of-n signing demoed across real separate browser tabs over BroadcastChannel</li>
+            <li>Every primitive runs live in the browser, computed on the spot, not precomputed</li>
+          </ul>
+        </div>
         <div class="project-footer">
           <div class="project-tags"><span class="tag-item">Python</span><span class="tag-item">JavaScript</span><span class="tag-item">Merkle Trees</span></div>
           <div class="project-links">
@@ -569,7 +592,14 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
 
       <div class="project-card reveal">
         <div class="project-header"><div class="project-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div><span class="project-file"><iconify-icon icon="solar:lock-keyhole-bold" style="font-size:.9rem;"></iconify-icon> haven.js</span></div>
-        <div class="project-body">A local-first task app where every task is encrypted client-side (AES-256-GCM, key derived via PBKDF2-SHA256 at 600,000 iterations) before it ever touches storage or the network. No account required, works offline, and a live "you vs. the server" reveal proves the encryption claim instead of just stating it.</div>
+        <div class="project-body">
+          <p class="project-summary">A task app that can't read your tasks, and proves it instead of just claiming it.</p>
+          <ul class="project-highlights">
+            <li>AES-256-GCM client-side, key derived via PBKDF2-SHA256 at 600,000 iterations</li>
+            <li>No account, works fully offline, nothing readable ever touches the network</li>
+            <li>A live "you vs. the server" panel shows exactly what the backend actually sees: ciphertext</li>
+          </ul>
+        </div>
         <div class="project-footer">
           <div class="project-tags"><span class="tag-item">JavaScript</span><span class="tag-item">Web Crypto API</span><span class="tag-item">Python</span></div>
           <div class="project-links">
@@ -593,6 +623,9 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
         <div class="terminal-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
         <span class="terminal-title"><iconify-icon icon="solar:notebook-bold" style="font-size:.9rem;"></iconify-icon> ~/notes $ ls</span>
       </div>
+      <div class="blog-section-label">$ ls events/</div>
+      <div class="events-list" id="eventsList"></div>
+      <div class="blog-section-label">$ ls notes/</div>
       <div class="blog-list" id="blogList"></div>
     </div>
   </section>
@@ -606,7 +639,7 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
     <div class="fun-terminal reveal" id="funTerminal">
       <div class="terminal-header">
         <div class="terminal-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-        <span class="terminal-title"><iconify-icon icon="solar:programming-bold" style="font-size:.9rem;"></iconify-icon> guest@abhinav.dev: ~</span>
+        <span class="terminal-title"><iconify-icon icon="solar:programming-bold" style="font-size:.9rem;"></iconify-icon> guest@abhinav: ~</span>
       </div>
       <div class="fun-terminal-body" id="funTerminalBody">
         <div class="code-line output">This one actually runs. Type <span class="command">help</span> to see what it does — or just try <span class="command">todo</span>.</div>
@@ -632,7 +665,7 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
             <div class="form-line"><span class="prompt"><iconify-icon icon="solar:user-bold"></iconify-icon></span><input type="text" id="name" class="cli-input" placeholder="Your name..." required></div>
             <div class="form-line"><span class="prompt"><iconify-icon icon="solar:letter-bold"></iconify-icon></span><input type="email" id="email" class="cli-input" placeholder="Your email..." required></div>
             <div class="form-line"><span class="prompt"><iconify-icon icon="solar:pen-new-square-bold"></iconify-icon></span><textarea id="message" class="cli-input cli-textarea" placeholder="Type your message..." required></textarea></div>
-            <div class="form-line"><button type="submit" class="submit-btn"><iconify-icon icon="solar:plain-2-bold"></iconify-icon> send_message --ui-only</button></div>
+            <div class="form-line"><button type="submit" class="submit-btn"><iconify-icon icon="solar:plain-2-bold"></iconify-icon> send_message</button></div>
             <div id="form-response" class="form-response"></div>
           </form>
         </div>
@@ -678,9 +711,9 @@ document.getElementById('yr').textContent = new Date().getFullYear();
   const screen = document.getElementById('boot-screen');
   const text = document.getElementById('boot-text');
   const lines = [
-    '$ connecting to abhinav.dev...',
-    '$ loading full-stack profile... OK',
-    '$ loading security profile... OK',
+    '$ ./boot.sh',
+    '$ loading profile... OK',
+    '$ mounting projects/... OK',
     '$ rendering portfolio...',
   ];
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || sessionStorage.getItem('booted')) {
@@ -752,15 +785,15 @@ updateActiveNav();
 const terminalBody = document.getElementById('terminalBody');
 const TERMINAL_SCRIPT = [
   { type: 'command', text: 'whoami' },
-  { type: 'output', text: 'Abhinav Kumar — full-stack developer, security researcher' },
+  { type: 'output', text: 'Abhinav Kumar, Sydney' },
   { type: 'command', text: 'cat mission.txt' },
-  { type: 'output', text: 'Build real, working software. Understand exactly how it breaks.' },
+  { type: 'output', text: 'Build something real. Figure out how to break it. Fix that.' },
   { type: 'command', text: './ship.sh --projects' },
   { type: 'output', text: '✓ crackrsa.com — RSA cracked with a real quantum sim' },
   { type: 'output', text: '✓ threshold signatures — Winternitz OTS + Merkle trees' },
   { type: 'output', text: '✓ taskhavens.com — AES-256-GCM, client-side, always' },
   { type: 'command', text: 'echo $STATUS' },
-  { type: 'output', text: 'open to full-stack & security roles', final: true },
+  { type: 'output', text: 'looking for my next role', final: true },
 ];
 async function typeLine(text, el){
   for (let i = 0; i <= text.length; i++) { el.textContent = text.slice(0, i); await new Promise(r => setTimeout(r, 18)); }
@@ -797,11 +830,17 @@ document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
 const skillIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); skillIO.unobserve(e.target); } }), { threshold: .4 });
 document.querySelectorAll('.skill-item').forEach(el => skillIO.observe(el));
 
-/* ============ CONTACT FORM (UI-only, honestly labelled) ============ */
+/* ============ CONTACT FORM (opens a real email, no third-party form backend) ============ */
 document.getElementById('contactForm').addEventListener('submit', e => {
   e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+  const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+  window.location.href = `mailto:pinku2c@gmail.com?subject=${subject}&body=${body}`;
   const resp = document.getElementById('form-response');
-  resp.textContent = 'This form is a UI demo only — email me directly at pinku2c@gmail.com instead.';
+  resp.textContent = 'Opening your email client with this message pre-filled...';
   resp.classList.add('show');
 });
 
@@ -904,6 +943,18 @@ const BLOG_POSTS = [
     body: `<p class="lead">Walk into any supermarket and you're surrounded by unguarded, easily-pocketed stock. That's not an oversight — it's a risk decision.</p><p>Locking everything down would cost more in friction and lost sales than the shrinkage it would prevent. So shops accept a tolerable level of theft and spend instead on cheap deterrents: cameras, sightlines, the occasional checkpoint. It's the same calculus security teams run every day — you don't prevent every risk, you spend where prevention is cheaper than the loss.</p>` },
 ];
 const TAG_LABEL = { se: 'security everywhere', act: 'activity', case: 'case study' };
+const EVENTS = [
+  { title: 'SCONES — UNSW Security Conference', meta: 'attended · Jun 2026',
+    desc: "Sat in on a talk about network segmentation and insider threat: why a flat network lets one compromised device reach everything, and how VLANs give logical isolation on shared hardware without needing physically separate switches." },
+];
+const eventsListEl = document.getElementById('eventsList');
+eventsListEl.innerHTML = EVENTS.map(ev => `
+  <div class="event-entry">
+    <span class="event-title">${ev.title}</span>
+    <span class="event-meta">${ev.meta}</span>
+    <span class="event-desc">${ev.desc}</span>
+  </div>`).join('');
+
 const blogListEl = document.getElementById('blogList');
 blogListEl.innerHTML = BLOG_POSTS.map(p => `
   <div class="blog-entry" data-slug="${p.slug}">
