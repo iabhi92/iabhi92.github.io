@@ -79,11 +79,6 @@ iconify-icon { display: inline-flex; vertical-align: middle; }
 .interactive-icon, .nav-link:hover iconify-icon, .sidebar-link:hover iconify-icon, .project-link:hover iconify-icon, .social-link:hover iconify-icon { transition: transform .35s ease, color .35s ease, filter .35s ease; }
 .sidebar-link:hover iconify-icon, .social-link:hover iconify-icon { transform: translateY(-2px) scale(1.08); filter: drop-shadow(0 0 10px currentColor); }
 
-/* CUSTOM CURSOR */
-.custom-cursor { width: 12px; height: 12px; border: 2px solid var(--neon-red); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; transition: transform .1s ease, border-color .3s ease; mix-blend-mode: difference; display: none; }
-.cursor-follower { width: 30px; height: 30px; background: rgba(255,43,61,.1); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform .3s ease, width .3s ease, height .3s ease; display: none; }
-@media (min-width:900px) and (hover:hover) { .custom-cursor, .cursor-follower { display: block; } body { cursor: none; } }
-
 /* SIDEBAR APP SHELL */
 .sidebar-overlay { display: none; position: fixed; inset: 0; z-index: 1090; background: rgba(4,10,20,.72); backdrop-filter: blur(4px); opacity: 0; transition: opacity .3s ease; pointer-events: none; }
 .mobile-topbar { display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 1101; height: var(--mobile-header-h); padding: 0 14px 0 10px; align-items: center; gap: 10px; background: linear-gradient(135deg, rgba(10,10,10,.97), rgba(13,17,23,.94)); border-bottom: 1px solid var(--border-color); backdrop-filter: blur(18px); }
@@ -675,9 +670,6 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
 
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><iconify-icon icon="solar:arrow-up-bold"></iconify-icon></button>
 
-<div class="custom-cursor" id="cursor"></div>
-<div class="cursor-follower" id="cursorFollower"></div>
-
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 
@@ -812,19 +804,6 @@ document.getElementById('contactForm').addEventListener('submit', e => {
   resp.textContent = 'This form is a UI demo only — email me directly at pinku2c@gmail.com instead.';
   resp.classList.add('show');
 });
-
-/* ============ CUSTOM CURSOR ============ */
-const cursor = document.getElementById('cursor'), follower = document.getElementById('cursorFollower');
-if (window.matchMedia('(hover:hover) and (min-width:900px)').matches) {
-  window.addEventListener('mousemove', e => {
-    cursor.style.transform = `translate(${e.clientX-6}px, ${e.clientY-6}px)`;
-    follower.style.transform = `translate(${e.clientX-15}px, ${e.clientY-15}px)`;
-  });
-  document.querySelectorAll('a, button, .sidebar-link, .project-card').forEach(el => {
-    el.addEventListener('mouseenter', () => follower.style.transform += ' scale(1.6)');
-    el.addEventListener('mouseleave', () => {});
-  });
-}
 
 /* ============ MATRIX RAIN ============ */
 (function(){
