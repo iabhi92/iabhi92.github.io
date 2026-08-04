@@ -324,6 +324,7 @@ body.vp-mobile .main-content, body.vp-compact .main-content { margin-left: 0; pa
 .cli-textarea { min-height: 100px; resize: vertical; }
 .submit-btn { justify-content: center; background: transparent; border: 1px solid var(--neon-red); color: var(--neon-red); padding: 12px 24px; font-family: inherit; font-size: .8rem; cursor: pointer; border-radius: 6px; transition: all .3s ease; text-shadow: 0 0 5px var(--neon-red); width: 100%; display: inline-flex; align-items: center; gap: 8px; }
 .submit-btn:hover { background: rgba(255,43,61,.1); box-shadow: var(--glow-red); transform: translateY(-2px); }
+.submit-btn:disabled { opacity: .55; cursor: default; pointer-events: none; }
 .form-response { font-size: .8rem; padding: 8px; display: none; }
 .form-response.show { display: block; color: var(--neon-red); animation: fadeIn .5s ease; }
 @keyframes fadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
@@ -662,10 +663,10 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
       <div class="contact-terminal reveal">
         <div class="terminal-header"><div class="terminal-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div><span class="terminal-title">message.sh</span></div>
         <div class="contact-form-body">
-          <form class="cli-form" id="contactForm">
-            <div class="form-line"><span class="prompt"><iconify-icon icon="solar:user-bold"></iconify-icon></span><input type="text" id="name" class="cli-input" placeholder="Your name..." required></div>
-            <div class="form-line"><span class="prompt"><iconify-icon icon="solar:letter-bold"></iconify-icon></span><input type="email" id="email" class="cli-input" placeholder="Your email..." required></div>
-            <div class="form-line"><span class="prompt"><iconify-icon icon="solar:pen-new-square-bold"></iconify-icon></span><textarea id="message" class="cli-input cli-textarea" placeholder="Type your message..." required></textarea></div>
+          <form class="cli-form" id="contactForm" action="https://formspree.io/f/xjybbzdn" method="POST">
+            <div class="form-line"><span class="prompt"><iconify-icon icon="solar:user-bold"></iconify-icon></span><input type="text" id="name" name="name" class="cli-input" placeholder="Your name..." required></div>
+            <div class="form-line"><span class="prompt"><iconify-icon icon="solar:letter-bold"></iconify-icon></span><input type="email" id="email" name="email" class="cli-input" placeholder="Your email..." required></div>
+            <div class="form-line"><span class="prompt"><iconify-icon icon="solar:pen-new-square-bold"></iconify-icon></span><textarea id="message" name="message" class="cli-input cli-textarea" placeholder="Type your message..." required></textarea></div>
             <div class="form-line"><button type="submit" class="submit-btn"><iconify-icon icon="solar:plain-2-bold"></iconify-icon> send_message</button></div>
             <div id="form-response" class="form-response"></div>
           </form>
@@ -831,18 +832,31 @@ document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
 const skillIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); skillIO.unobserve(e.target); } }), { threshold: .4 });
 document.querySelectorAll('.skill-item').forEach(el => skillIO.observe(el));
 
-/* ============ CONTACT FORM (opens a real email, no third-party form backend) ============ */
-document.getElementById('contactForm').addEventListener('submit', e => {
+/* ============ CONTACT FORM (submits to Formspree, stays on-page) ============ */
+const contactForm = document.getElementById('contactForm');
+contactForm.addEventListener('submit', async e => {
   e.preventDefault();
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
-  const subject = encodeURIComponent(`Portfolio contact from ${name}`);
-  const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-  window.location.href = `mailto:pinku2c@gmail.com?subject=${subject}&body=${body}`;
   const resp = document.getElementById('form-response');
-  resp.textContent = 'Opening your email client with this message pre-filled...';
+  const submitBtn = contactForm.querySelector('.submit-btn');
+  submitBtn.disabled = true;
+  resp.textContent = 'Sending...';
   resp.classList.add('show');
+  try {
+    const res = await fetch(contactForm.action, {
+      method: 'POST',
+      body: new FormData(contactForm),
+      headers: { Accept: 'application/json' },
+    });
+    if (res.ok) {
+      resp.textContent = "Sent — I'll get back to you soon.";
+      contactForm.reset();
+    } else {
+      resp.textContent = 'Something went wrong — email me directly at pinku2c@gmail.com instead.';
+    }
+  } catch {
+    resp.textContent = 'Something went wrong — email me directly at pinku2c@gmail.com instead.';
+  }
+  submitBtn.disabled = false;
 });
 
 /* ============ MATRIX RAIN ============ */
