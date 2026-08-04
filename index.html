@@ -39,7 +39,8 @@
     --shadow:0 1px 2px rgba(20,23,30,.04), 0 10px 30px rgba(20,23,30,.07);
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
+  body{overflow-x:hidden;}
   body{margin:0; background:var(--bg); color:var(--ink); font-family:"IBM Plex Sans",system-ui,sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; transition:background .4s,color .4s;
     background-image:radial-gradient(var(--line) 1px, transparent 1px); background-size:26px 26px; background-position:-13px -13px;}
   .mono{font-family:"JetBrains Mono",ui-monospace,monospace;}
@@ -61,15 +62,45 @@
   .icon-btn:hover{color:var(--ink); border-color:var(--line-strong);}
 
   .hero{padding:60px 0 36px;}
-  .eyebrow{font-family:"JetBrains Mono",monospace; font-size:.76rem; letter-spacing:.14em; text-transform:uppercase; color:var(--defend-ink); display:flex; align-items:center; gap:11px; margin-bottom:20px;}
+  .eyebrow{font-family:"JetBrains Mono",monospace; font-size:.76rem; letter-spacing:.14em; text-transform:uppercase; color:var(--defend-ink); display:flex; flex-wrap:wrap; align-items:center; gap:8px 11px; margin-bottom:20px;}
   .eyebrow .seg{color:var(--attack-ink);}
   .eyebrow::before{content:""; width:26px; height:1px; background:var(--defend);}
   h1{font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:clamp(2.3rem,6vw,3.5rem); line-height:1.02; letter-spacing:-.035em; margin:0 0 18px; max-width:17ch;}
   h1 .atk{color:var(--attack);} h1 .def{color:var(--defend);}
   .lede{font-size:1.08rem; color:var(--muted); max-width:48ch; margin:0 0 20px;}
-  .status{font-family:"JetBrains Mono",monospace; font-size:.8rem; color:var(--faint); display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; margin-bottom:34px;}
+  .status{font-family:"JetBrains Mono",monospace; font-size:.8rem; color:var(--faint); display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; margin-bottom:28px;}
   .status .ok{color:var(--defend-ink);} .status b{color:var(--muted); font-weight:500;}
   .status .sep{color:var(--line-strong);}
+
+  /* HERO — headline + device mockup */
+  .hero-grid{display:grid; grid-template-columns:1.15fr 1fr; gap:52px; align-items:center; min-width:0;}
+  .hero-copy{min-width:0;}
+  .hero-ctas{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px;}
+  .stat-row{display:flex; gap:28px; flex-wrap:wrap;}
+  .stat-item .n{font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:1.7rem; letter-spacing:-.02em; color:var(--ink); display:flex; align-items:baseline; gap:2px;}
+  .stat-item .n .unit{font-size:.95rem; color:var(--defend-ink); font-weight:600;}
+  .stat-item .lbl{font-family:"JetBrains Mono",monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.07em; color:var(--faint); margin-top:3px;}
+
+  .device-wrap{position:relative; padding:10px; min-width:0;}
+  .device-glow{position:absolute; inset:-20% -10%; background:radial-gradient(circle at 60% 30%, color-mix(in srgb,var(--defend) 20%, transparent), transparent 60%); pointer-events:none; z-index:0;}
+  .device{position:relative; z-index:1; background:linear-gradient(155deg,var(--surface-2),var(--surface)); border:1px solid var(--line-strong); border-radius:16px; padding:9px; box-shadow:var(--shadow), 0 40px 80px -30px rgba(0,0,0,.55); transform:perspective(1400px) rotateY(-6deg) rotateX(2deg); transition:transform .5s ease;}
+  .device-wrap:hover .device{transform:perspective(1400px) rotateY(-2deg) rotateX(1deg);}
+  .device-bar{display:flex; align-items:center; gap:6px; padding:0 4px 9px;}
+  .device-bar .d{width:8px; height:8px; border-radius:50%; background:var(--line-strong);}
+  .device-bar .fname{margin-left:8px; font-family:"JetBrains Mono",monospace; font-size:.68rem; color:var(--faint);}
+  .device-screen{background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:16px 18px; overflow-x:auto; min-width:0;}
+  .device-screen pre{margin:0; font-family:"JetBrains Mono",monospace; font-size:.78rem; line-height:1.75; color:var(--muted); white-space:pre;}
+  .device-screen .kw{color:var(--violet-ink);} .device-screen .fn{color:var(--defend-ink);} .device-screen .st{color:var(--amber);} .device-screen .cm{color:var(--faint);} .device-screen .nu{color:var(--gold);}
+  .device-foot{display:flex; align-items:center; justify-content:space-between; padding:10px 14px 0; font-family:"JetBrains Mono",monospace; font-size:.68rem; color:var(--faint);}
+  .device-foot .live-tag{color:var(--defend-ink); display:inline-flex; align-items:center; gap:6px;}
+  .device-foot .live-tag .d{width:6px; height:6px; border-radius:50%; background:var(--defend); box-shadow:0 0 8px var(--defend); animation:beat 1.6s ease-in-out infinite;}
+  .device-hinge{height:12px; margin:8px 22px 0; background:linear-gradient(90deg,transparent,var(--line-strong) 20%,var(--line-strong) 80%,transparent); border-radius:0 0 8px 8px; opacity:.6;}
+  .device-badges{position:absolute; z-index:2; display:flex; flex-direction:column; gap:10px;}
+  .badge-float{background:var(--surface); border:1px solid var(--line-strong); border-radius:10px; padding:8px 12px; box-shadow:var(--shadow); font-family:"JetBrains Mono",monospace; font-size:.7rem; display:flex; align-items:center; gap:7px; white-space:nowrap;}
+  .badge-float.b1{top:-14px; right:-8px;} .badge-float.b2{bottom:6px; left:-18px;}
+  .badge-float .dd{width:7px; height:7px; border-radius:50%;}
+  .badge-float.b1 .dd{background:var(--defend); box-shadow:0 0 8px var(--defend);}
+  .badge-float.b2 .dd{background:var(--attack); box-shadow:0 0 8px var(--attack);}
 
   /* LIVE DETECTION CONSOLE */
   .console{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; position:relative;}
@@ -254,6 +285,10 @@
     @keyframes travelV{0%{top:2px;opacity:0;}15%{opacity:1;}85%{opacity:1;}100%{top:calc(100% - 11px);opacity:0;}}
     .projects{grid-template-columns:1fr;} .events{grid-template-columns:1fr;} .creds{grid-template-columns:1fr;}
     .about-grid{grid-template-columns:1fr; gap:26px;}
+    .hero-grid{grid-template-columns:1fr; gap:36px;}
+    .device{transform:none;} .device-wrap:hover .device{transform:none;}
+    .badge-float{position:static; margin-top:8px;} .device-badges{position:static; flex-direction:row; flex-wrap:wrap; margin-top:10px;}
+    .stat-row{gap:20px;}
     .contact-card{grid-template-columns:1fr; padding:26px;}
     .finding{grid-template-columns:84px 1fr;} .f-side{grid-column:1/-1; flex-direction:row; justify-content:space-between; border-top:1px solid var(--line); padding-top:12px;}
     .note{grid-template-columns:1fr auto;} .note .ntype{grid-column:1/-1;}
@@ -287,35 +322,46 @@
 
   <!-- HERO + INTERACTIVE PLAYGROUND -->
   <section class="hero">
-    <div class="eyebrow"><span class="seg">attack</span> → <span>defend</span> · crypto</div>
-    <h1>I <span class="atk">break</span> web apps, then I help <span class="def">catch</span> the people who do.</h1>
-    <p class="lede">Web exploitation, applied cryptography, and the detection that stops the same attacks in production. Type an attack below — or tap one — and watch the engine catch it live.</p>
-    <div class="status">
-      <span><span class="ok">●</span> available for security roles</span>
-      <span class="sep">|</span><span><b>Sydney, AU</b></span>
-      <span class="sep">|</span><span>offensive → defensive</span>
-      <span class="sep">|</span><span>University CTF · XSS <b>4/4</b></span>
-    </div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow"><span>full-stack builder</span> → <span class="seg">security depth</span></div>
+        <h1>I build real software — then <span class="atk">break</span> it until it's <span class="def">solid</span>.</h1>
+        <p class="lede">Three shipped products — React/FastAPI, vanilla JS + the Web Crypto API, Python from scratch — built by someone who's also spent real hours exploiting XSS, SQL injection, and stack overflows. That background changes what "solid" means to me.</p>
+        <div class="hero-ctas">
+          <a class="btn primary" href="#projects">See the work</a>
+          <a class="btn" href="#work">Security findings ↓</a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
+        <div class="stat-row reveal">
+          <div class="stat-item"><div class="n">03</div><div class="lbl">Shipped products</div></div>
+          <div class="stat-item"><div class="n">10</div><div class="lbl">Vuln classes exploited</div></div>
+          <div class="stat-item"><div class="n">116<span class="unit">+</span></div><div class="lbl">Automated tests, flagship project</div></div>
+        </div>
+        <div class="status" style="margin-top:26px;">
+          <span><span class="ok">●</span> available for security &amp; full-stack roles</span>
+          <span class="sep">|</span><span><b>Sydney, AU</b></span>
+        </div>
+      </div>
 
-    <div class="console">
-      <div class="con-head"><span class="live"><span class="d"></span>LIVE DETECTION CONSOLE</span><span class="hint">type a payload, watch it get caught</span></div>
-      <div class="con-body">
-        <div class="con-input">
-          <span class="method">GET /search?q=</span>
-          <input id="con-in" type="text" spellcheck="false" autocomplete="off" aria-label="Attack input" />
+      <div class="device-wrap reveal">
+        <div class="device-glow"></div>
+        <div class="device">
+          <div class="device-bar"><div class="d" style="background:#FF5F57"></div><div class="d" style="background:#FEBC2E"></div><div class="d" style="background:#28C840"></div><span class="fname">hash.py — hash-based-threshold-signatures</span></div>
+          <div class="device-screen"><pre><span class="kw">def</span> <span class="fn">hash_lms</span>(tweak, *data):
+    h = hashlib.sha256()
+    <span class="kw">for</span> t <span class="kw">in</span> tweak:
+        h.update(t.to_bytes(<span class="nu">4</span>, <span class="st">"big"</span>))
+    <span class="kw">for</span> d <span class="kw">in</span> data:
+        h.update(d)
+    <span class="cm"># domain-separated, tweakable hash —</span>
+    <span class="cm"># the primitive everything else is built on</span>
+    <span class="kw">return</span> h.digest()</pre></div>
+          <div class="device-foot"><span class="live-tag"><span class="d"></span>live at crackrsa.com</span><span>Python + React + FastAPI</span></div>
         </div>
-        <div class="con-chips" id="con-chips"><span class="cl">try:</span></div>
-        <div class="con-verdict" id="con-verdict">
-          <span class="v-badge" id="v-badge">—</span>
-          <div class="v-detail">
-            <div class="v-rule" id="v-rule">—</div>
-            <div class="v-meta" id="v-meta"></div>
-            <div class="v-match" id="v-match"></div>
-          </div>
-        </div>
-        <div class="con-log">
-          <div class="lg-h">WAF event log</div>
-          <div id="con-log"></div>
+        <div class="device-hinge"></div>
+        <div class="device-badges">
+          <div class="badge-float b1"><span class="dd"></span>real IBM quantum hardware run</div>
+          <div class="badge-float b2"><span class="dd"></span>AES-256-GCM, client-side only</div>
         </div>
       </div>
     </div>
@@ -325,6 +371,29 @@
   <section id="work">
     <div class="sec-head"><div><div class="eb">selected work · the proof</div><h2>Findings register</h2></div><span class="count" id="f-count">—</span></div>
     <div class="reveal">
+      <p style="font-size:.9rem;color:var(--muted);max-width:60ch;margin:0 0 20px;">Every offensive project comes with a defensive mirror. Type a payload below — or tap one — and watch the same detection logic that catches these techniques in the wild.</p>
+      <div class="console" style="margin-bottom:28px;">
+        <div class="con-head"><span class="live"><span class="d"></span>LIVE DETECTION CONSOLE</span><span class="hint">type a payload, watch it get caught</span></div>
+        <div class="con-body">
+          <div class="con-input">
+            <span class="method">GET /search?q=</span>
+            <input id="con-in" type="text" spellcheck="false" autocomplete="off" aria-label="Attack input" />
+          </div>
+          <div class="con-chips" id="con-chips"><span class="cl">try:</span></div>
+          <div class="con-verdict" id="con-verdict">
+            <span class="v-badge" id="v-badge">—</span>
+            <div class="v-detail">
+              <div class="v-rule" id="v-rule">—</div>
+              <div class="v-meta" id="v-meta"></div>
+              <div class="v-match" id="v-match"></div>
+            </div>
+          </div>
+          <div class="con-log">
+            <div class="lg-h">WAF event log</div>
+            <div id="con-log"></div>
+          </div>
+        </div>
+      </div>
       <div class="filter-row"><span class="lbl">side</span>
         <button class="filter" data-grp="side" data-val="all" aria-pressed="true">all</button>
         <button class="filter" data-grp="side" data-val="offensive" aria-pressed="false">offensive</button>
@@ -343,7 +412,7 @@
 
   <!-- WORK: PROJECTS -->
   <section id="projects">
-    <div class="sec-head"><div><div class="eb">selected work · sustained</div><h2>Projects</h2></div><span class="count" id="p-count">—</span></div>
+    <div class="sec-head"><div><div class="eb">shipped, not theoretical</div><h2>Projects that ship</h2></div><span class="count" id="p-count">—</span></div>
     <div class="projects reveal" id="projects-list"></div>
   </section>
 
@@ -374,9 +443,9 @@
         <p>Everything here is documented the way a professional finding is — reproduction, impact, remediation — not just a flag and a screenshot.</p>
       </div>
       <div class="reveal">
-        <div class="stack-group"><h4>Offensive</h4><div class="pills"><span class="pill">Burp Suite</span><span class="pill">OWASP Top 10</span><span class="pill">Nmap</span><span class="pill">XSS</span><span class="pill">SQLi</span></div></div>
+        <div class="stack-group"><h4>Offensive</h4><div class="pills"><span class="pill">Burp Suite</span><span class="pill">OWASP Top 10</span><span class="pill">Nmap</span><span class="pill">XSS</span><span class="pill">SQLi</span><span class="pill">Binary Exploitation</span><span class="pill">Format String Vulns</span><span class="pill">gdb / objdump</span></div></div>
         <div class="stack-group"><h4>Defensive</h4><div class="pills"><span class="pill">Splunk</span><span class="pill">Microsoft Sentinel</span><span class="pill">MITRE ATT&amp;CK</span><span class="pill">Elastic</span></div></div>
-        <div class="stack-group"><h4>Build</h4><div class="pills"><span class="pill">Python</span><span class="pill">Linux</span><span class="pill">Cryptography</span><span class="pill">PowerShell</span></div></div>
+        <div class="stack-group"><h4>Build</h4><div class="pills"><span class="pill">Python</span><span class="pill">React / TypeScript</span><span class="pill">Linux</span><span class="pill">Applied Cryptography</span><span class="pill">RSA / Merkle Trees</span><span class="pill">PowerShell</span></div></div>
       </div>
     </div>
     <div class="sub-label" style="margin-top:32px;">Credentials</div>
@@ -397,7 +466,7 @@
         <span class="visa">✓ Full work rights — Temporary Graduate visa (subclass 485)</span>
       </div>
       <div class="cta-col">
-        <a class="btn primary" data-edit="email" href="mailto:you@example.com">Email me</a>
+        <a class="btn primary" data-edit="email" href="mailto:pinku2c@gmail.com">Email me</a>
         <a class="btn" data-edit="link" href="https://github.com/iabhi92" target="_blank" rel="noopener">GitHub ↗</a>
         <a class="btn" data-edit="link" href="https://linkedin.com/in/your-handle" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
@@ -506,6 +575,84 @@ const FINDINGS = [
 <h3>Fix</h3>
 <p>Allow-list, don't block-list. Encode output and apply a CSP that forbids inline handlers.</p>` },
 
+  { id:"FND-005", slug:"second-order-sqli-privilege-escalation", side:"offensive", plat:"University CTF", sev:"high", sevLabel:"high",
+    title:"Second-Order SQL Injection — Privilege Escalation", blurb:"Login was parameterised and safe, but the account-creation path built a query by string concatenation and allowed stacked statements — enough to insert a second, self-made admin account.",
+    tags:["SQLi","CWE-89","stacked-queries","privesc"], date:"2026-06",
+    body:`<p class="lead">The obvious entry point — the login form — was already parameterised. The real bug was one step removed, in account creation.</p>
+<h3>The vulnerability</h3>
+<p>The registration flow inserted the submitted username directly into a query via string formatting, and the driver allowed multiple statements per request. That combination turns a single crafted username into an arbitrary follow-up statement.</p>
+<h3>Approach</h3>
+<p>A username payload closed the original <code>INSERT</code>, then appended a second statement creating a new account with an admin flag set, then commented out the rest of the original query. Logging back in as that new account exposed the privileged view.</p>
+<h3>How you'd catch it <span class="def-tag">defensive</span></h3>
+<p>Query logs showing a registration request containing SQL keywords (<code>INSERT</code>, <code>--</code>, stray semicolons) inside what should be a plain username field is a strong signal — the field's expected shape is the tell, not just the presence of a quote.</p>
+<h3>Fix</h3>
+<p>Parameterise every query path, not just the obviously sensitive ones, and disable multi-statement execution at the driver level so even a missed parameterisation can't chain a second command.</p>` },
+
+  { id:"FND-006", slug:"stack-overflow-adjacent-variable-and-return-address", side:"offensive", plat:"University CTF", sev:"high", sevLabel:"high",
+    title:"Stack Buffer Overflow — Adjacent Variable & Return-Address Control", blurb:"Unbounded gets() into a fixed buffer, with the offset to a neighbouring variable (and separately, to the saved return address) recovered from a disassembly rather than guessed.",
+    tags:["binary-exploitation","CWE-121","gets","stack"], date:"2026-06",
+    body:`<p class="lead">Two related challenges, same root cause: an unbounded read into a fixed-size stack buffer, with something worth overwriting sitting close by.</p>
+<h3>The vulnerability</h3>
+<p><code>gets()</code> performs no bounds checking, so any input longer than the destination buffer keeps writing past it. Disassembling the binary gave the exact stack offset from the buffer to the target — in one case a nearby access-control variable, in another the saved return address itself (the binary had no PIE, so its target function lived at a fixed, known address).</p>
+<h3>Approach</h3>
+<p>Padding bytes filled the buffer exactly up to the recovered offset, followed by the value to land there — a flag byte in the first case, a function address in the second. No brute forcing; the offset came from reading the binary, not trial and error.</p>
+<h3>How you'd catch it <span class="def-tag">defensive</span></h3>
+<p>A crash or an unexpected control-flow jump right after an oversized input to a known <code>gets()</code>-using binary is the classic signature. Compiling with stack canaries and <code>_FORTIFY_SOURCE</code> turns a silent overwrite into a loud abort.</p>
+<h3>Fix</h3>
+<p>Replace <code>gets()</code> with <code>fgets()</code> (a length-bounded read), and don't place trust-relevant state in a stack frame adjacent to a user-controlled buffer regardless of which read function is used.</p>` },
+
+  { id:"FND-007", slug:"function-pointer-hijack", side:"offensive", plat:"University CTF", sev:"crit", sevLabel:"critical",
+    title:"Function Pointer Hijack via Buffer Overflow", blurb:"A stack-resident function pointer sat a fixed distance below a gets() buffer; overflowing into it redirected an indirect call to a function that was never supposed to run.",
+    tags:["binary-exploitation","CWE-121","function-pointer"], date:"2026-06",
+    body:`<p class="lead">Instead of aiming at the return address, this target was a function pointer the program itself was about to call.</p>
+<h3>The vulnerability</h3>
+<p>A local <code>void (*fn)(void)</code> variable, initialised to one function, sat a fixed number of bytes below an unbounded <code>gets()</code> buffer. The program printed its own diagnostic information before taking input, which — combined with the fixed offset from disassembly — was enough to build a precise overwrite.</p>
+<h3>Approach</h3>
+<p>Padding filled the buffer to the pointer's offset, then a target address overwrote it directly. When the program made its indirect call through that pointer, execution jumped to the intended target function instead of the original one.</p>
+<h3>How you'd catch it <span class="def-tag">defensive</span></h3>
+<p>Indirect calls landing outside a function's normal call graph are a strong signal for control-flow-integrity tooling; at the log level, a program printing internal addresses to an unauthenticated client is itself worth flagging before any exploitation happens.</p>
+<h3>Fix</h3>
+<p>Never print internal addresses to users, keep function pointers in read-only memory where the toolchain allows it, and prefer a bounds-checked read over <code>gets()</code> so the overwrite is never possible in the first place.</p>` },
+
+  { id:"FND-008", slug:"bypassing-a-hand-rolled-stack-canary", side:"offensive", plat:"University CTF", sev:"high", sevLabel:"high",
+    title:"Bypassing a Hand-Rolled Stack Canary", blurb:"A DIY canary checked the local stack copy against a global — and the program printed the canary's value back to the client before the check ever ran.",
+    tags:["binary-exploitation","CWE-121","canary-bypass"], date:"2026-06",
+    body:`<p class="lead">This challenge implemented its own stack-canary check — and every piece of that implementation was a mistake a real compiler canary doesn't make.</p>
+<h3>The vulnerability</h3>
+<p>Three separate issues compounded: the canary value was predictable (a seeded PRNG, not a CSPRNG), it was printed back to the client as ordinary output before the vulnerable read, and the comparison checked a local stack copy against a global variable rather than a value the overflow itself couldn't reach.</p>
+<h3>Approach</h3>
+<p>The leaked value was captured from the program's own output, then replayed at the correct offset inside the overflow payload — restoring the exact canary the check expected — before continuing on to overwrite the saved frame pointer and redirect execution.</p>
+<h3>How you'd catch it <span class="def-tag">defensive</span></h3>
+<p>A binary that echoes what looks like a canary or nonce value back to an unauthenticated caller is a red flag regardless of what it's protecting — that pattern shows up in log review well before anyone tries to exploit it.</p>
+<h3>Fix</h3>
+<p>Don't hand-roll a canary. A real compiler canary (<code>gcc -fstack-protector</code>) is drawn from <code>/dev/urandom</code>, is never exposed to the program's own output, and sits in memory the overflow can't reach before it can be checked.</p>` },
+
+  { id:"FND-009", slug:"format-string-arbitrary-read", side:"offensive", plat:"University CTF", sev:"high", sevLabel:"high",
+    title:"Format String — Arbitrary Memory Read", blurb:"printf(user_input) instead of printf(\"%s\", user_input) let the format string itself pull values off the stack — numbered specifiers (%N$x) targeted a specific slot without a long scan.",
+    tags:["format-string","CWE-134","info-leak"], date:"2026-06",
+    body:`<p class="lead">The classic format-string bug: user input passed as the <em>format</em> argument to <code>printf</code>, not as a plain string being printed.</p>
+<h3>The vulnerability</h3>
+<p><code>printf(name)</code> instead of <code>printf("%s", name)</code> means every <code>%</code>-conversion in the attacker's input is honoured. With no arguments supplied to match the conversions, <code>printf</code> keeps reading whatever is next on the stack.</p>
+<h3>Approach</h3>
+<p>With a short input buffer, a sequential scan (<code>%x %x %x...</code>) wastes space. Numbered specifiers (<code>%2$x</code>) address a specific stack slot directly, so a handful of characters can target exactly the slot holding a value of interest — in one variant that value was sitting in plain view; in a variant where it wasn't printed on success, the same numbered-read technique recovered a value stored elsewhere in memory instead.</p>
+<h3>How you'd catch it <span class="def-tag">defensive</span></h3>
+<p>Any request containing raw <code>%</code>-conversion specifiers (<code>%x</code>, <code>%n</code>, <code>%s</code>) in a field that should be plain text is unambiguous — there's no legitimate reason for that syntax to appear in user input at all.</p>
+<h3>Fix</h3>
+<p><code>printf("%s", input)</code>, always. Static analysis (<code>-Wformat -Wformat-security</code>) catches this exact bug class at compile time.</p>` },
+
+  { id:"FND-010", slug:"format-string-arbitrary-write", side:"offensive", plat:"University CTF", sev:"crit", sevLabel:"critical",
+    title:"Format String — Arbitrary Memory Write (%n)", blurb:"The same unguarded printf() also accepts %hn, which writes the number of bytes output so far to an address of the attacker's choosing — turned into a direct, no-leak overwrite of program state.",
+    tags:["format-string","CWE-134","arbitrary-write"], date:"2026-06",
+    body:`<p class="lead">Reading memory through a format string bug is bad; the <code>%n</code> family writes to it, which is worse.</p>
+<h3>The vulnerability</h3>
+<p>Same root cause as the read case — user input used directly as a format string — but here the target variable's address was already known (recovered via <code>nm</code>/disassembly) and its value range was small enough that a single <code>%hn</code> (a 2-byte write) was sufficient.</p>
+<h3>Approach</h3>
+<p>The payload packed the target address into the input, then used a width specifier to control exactly how many bytes <code>printf</code> had written by the time it reached <code>%n</code> — controlling the value written, not just the address. One numbered write, no address leak required, since the target was fixed at compile time.</p>
+<h3>How you'd catch it <span class="def-tag">defensive</span></h3>
+<p><code>%n</code> and <code>%hn</code> in user-supplied input should never appear in legitimate traffic; a WAF or input filter can treat their presence alone as a block condition, independent of anything else in the request.</p>
+<h3>Fix</h3>
+<p>Compilers can disable <code>%n</code> entirely (<code>FORTIFY_SOURCE</code> rejects it in writable-format-string contexts) — but the real fix is the same as the read case: never pass untrusted input as a format string.</p>` },
+
   { id:"HTB-001", slug:"htb-template", side:"offensive", plat:"HackTheBox", sev:"neutral", sevLabel:"template", tmpl:true,
     title:"Your first HackTheBox box", blurb:"Replace me: recon → foothold → privesc → root, written up as a finding. Pick a box where you chained something interesting.",
     tags:["template","replace-me"], date:"—",
@@ -518,20 +665,31 @@ const FINDINGS = [
 ];
 
 const PROJECTS = [
-  { title:"Shor's Algorithm vs RSA", status:"in progress", statusClass:"active",
-    goal:"Implement RSA from scratch, then classically simulate Shor's period-finding to demonstrate the quantum threat on small keys — step by step.",
-    stack:["Python","Number theory","RSA"], repo:"#",
+  { title:"Shor's Algorithm vs RSA", status:"shipped", statusClass:"shipped",
+    goal:"RSA implemented from scratch, classical factoring attacks, a from-scratch quantum statevector simulator (cross-validated against Google Cirq), and a real run submitted to actual IBM quantum hardware — an end-to-end, hands-on demonstration of why (and when) quantum computing threatens RSA.",
+    stack:["Python","FastAPI","React","Qiskit","Number theory"], repo:"https://github.com/iabhi92/shors-rsa-cracker", live:"https://crackrsa.com",
     updates:[
-      {d:"Wk 4", t:"Combine RSA impl with Shor sim; factor a small modulus N = p·q end to end."},
-      {d:"Wk 3", t:"Implemented the period-finding core classically; verified the speedup intuition."},
-      {d:"Wk 2", t:"Documented why factoring is hard classically; first RSA keygen/enc/dec in Python."},
+      {d:"latest", t:"Custom domain (crackrsa.com), build-time prerendering so every route is actually indexable, and full SEO pass."},
+      {d:"—", t:"Live run against real IBM quantum hardware (backend ibm_fez / ibm_marrakesh), not a stored screenshot."},
+      {d:"—", t:"From-scratch quantum statevector simulator, verified bit-for-bit against Google Cirq and a fast sampling simulator."},
+      {d:"—", t:"Six live attacks on textbook RSA (malleability lab) plus classical factoring attacks (trial division, Pollard's rho, Fermat)."},
     ] },
-  { title:"Hash-Based Threshold Signatures", status:"shipped", statusClass:"shipped",
-    goal:"Python implementation of distributed hash-based threshold signatures (Kelsey/Lang/Lucks 2024) using Winternitz OTS and Merkle trees.",
-    stack:["Python","Merkle trees","WOTS+"], repo:"#",
+  { title:"Distributed Hash-Based Threshold Signatures", status:"shipped", statusClass:"shipped",
+    goal:"An implementation of Kelsey, Lang & Lucks (2024) — Winternitz one-time signatures, Merkle authentication trees, and their k-of-n threshold signing protocol, with every primitive computed live in the browser, not just described.",
+    stack:["Python","JavaScript","Merkle trees","Winternitz OTS"], repo:"https://github.com/iabhi92/Crypto-Project", live:"https://iabhi92.github.io/Crypto-Project/",
     updates:[
-      {d:"v1.0", t:"Working threshold sign/verify built end to end as a portfolio project."},
-      {d:"—", t:"Implemented Winternitz one-time signatures and Merkle authentication paths."},
+      {d:"latest", t:"Live weak-seed brute-force demo and a measured timing side-channel analysis of chain-walking, both computed in-browser."},
+      {d:"—", t:"A real multi-tab threshold demo over BroadcastChannel — separate browser processes, not one shared array pretending to be trustees."},
+      {d:"—", t:"116 tests incl. Hypothesis property-based fuzzing; crash-safe append-only log for one-time-key state."},
+      {d:"—", t:"Core protocol: Winternitz OTS keygen/sign/verify, Merkle tree construction & auth paths, KK threshold sign/verify."},
+    ] },
+  { title:"Haven", status:"shipped", statusClass:"shipped",
+    goal:"A local-first task app where every task is encrypted client-side (AES-256-GCM, key derived via PBKDF2-SHA256 at 600,000 iterations) before it ever touches storage or the network — no account required, works offline, and optional sync moves only ciphertext.",
+    stack:["JavaScript","Web Crypto API","Python"], repo:"https://github.com/iabhi92/haven-tasks", live:"https://taskhavens.com",
+    updates:[
+      {d:"v1.0", t:"All 8 build phases shipped: task UX, crypto core, recovery-code account recovery, multi-device sync, hardening + self-attack, deploy."},
+      {d:"—", t:"Published a self-attack writeup (docs/SECURITY.md) — what was actually attacked, what was found, what's still an open gap."},
+      {d:"—", t:"Live 'you vs the server' reveal: shows the actual ciphertext the server holds, so the encryption claim isn't just a claim."},
     ] },
 ];
 
@@ -554,12 +712,35 @@ const NOTES = [
   { type:"case", slug:"houdini-authentication", typeLabel:"Case study", title:"Houdini, fake mediums, and authentication",
     blurb:"Reframed séance fraud as an auth problem; one-time challenge codes sealed with a lawyer beat a single shared secret.", wk:"Week 3", date:"2026-03",
     body:`<p class="lead">Houdini spent his later years exposing fake mediums who claimed to carry messages from the dead. I reframed his approach as an authentication problem.</p><p>A single shared secret (one agreed phrase) can be guessed, leaked or coerced. The robust version is one-time challenge codes, pre-committed and sealed with a third party — so a genuine message can be verified once and a fraud can't replay it. It's the same logic behind nonces and one-time tokens in modern auth.</p>` },
+  { type:"act", slug:"merkle-puzzles-key-exchange", typeLabel:"Activity", title:"Merkle puzzles — key exchange before public-key crypto existed",
+    blurb:"Brute-forcing one of 20 weak-cipher envelopes gets you a shared key; an eavesdropper has to brute-force many before finding the right one — an asymmetric-effort trick predating RSA.", wk:"Week 4", date:"2026-06",
+    body:`<p class="lead">Before RSA, Merkle showed you could still get a shared secret over an untrusted channel — by making the eavesdropper's job a fixed multiple harder than the legitimate parties', not impossible.</p><p>One side broadcasts many weakly-encrypted puzzles, each hiding a key and an ID. The other side cracks <em>one</em> at random — cheap, since they only need any single puzzle to fall. They reply, tagged with that puzzle's ID, encrypted under the recovered key. An eavesdropper who missed which puzzle got picked has to crack many before finding the matching one — on this toy scale about 10× the work, but the idea scales: more puzzles, stronger ciphers, and the gap becomes the whole point. It's a direct ancestor of the asymmetric-effort thinking behind public-key exchange, built with nothing but a weak cipher and a lot of envelopes.</p>` },
+  { type:"act", slug:"rsa-by-hand", typeLabel:"Activity", title:"Implementing RSA by hand",
+    blurb:"Generated keys from p=17, q=19 by hand, hit the 'e must be coprime with φ(N)' trap firsthand, and encrypted/decrypted a real message end to end.", wk:"Week 4", date:"2026-06",
+    body:`<p class="lead">Reading how RSA works and generating a keypair by hand turned out to teach different things.</p><p>With p=17, q=19 → N=323, φ(N)=288, the obvious choices for the public exponent e (3, 4) both failed — 288 factors into 2s and 3s, so anything sharing those factors isn't coprime with it. The private key falls out as the modular inverse of e mod φ(N). Once the keys existed, encrypting and decrypting a short message (mapping letters to two-digit numbers, modular exponentiation, and back) worked exactly as the lecture predicted — but doing the coprimality check by hand, and getting it wrong once first, made the "why e must be coprime with φ(N)" requirement concrete rather than a rule to memorise.</p>` },
+  { type:"se", slug:"qr-code-quishing", typeLabel:"Security Everywhere", title:"Quishing — phishing hidden inside a trusted QR code",
+    blurb:"A restaurant's QR-code menu made it obvious how little scrutiny a QR code gets versus the same link in an email — the code hides the destination and borrows the venue's trust.", wk:"Week 5", date:"2026-06",
+    body:`<p class="lead">A restaurant's QR-code menu is a small, everyday example of trust transfer that's easy to miss.</p><p>A QR code's destination is invisible until you scan it, and a sticker over a legitimate code is enough to redirect diners to a cloned payment page. The Australian Cyber Security Centre and the US FTC both flag exactly this pattern at cafes and restaurants. What makes it work isn't a technical flaw — it's that people who'd hesitate over a link in an email don't apply the same scrutiny to a code sitting next to their meal at a venue they already trust. The attack borrows the restaurant's credibility rather than breaking anything.</p>` },
+  { type:"act", slug:"google-maps-location-trail", typeLabel:"Activity", title:"What Google Maps actually keeps about you",
+    blurb:"'Your places' turned out to hold a detailed, timestamped trail of everywhere I'd searched or driven to via CarPlay — tied to my account, not anonymous.", wk:"Week 5", date:"2026-06",
+    body:`<p class="lead">I use Google Maps through CarPlay constantly and had never actually opened "Your places" until this activity.</p><p>It held a timestamped log of petrol stations, restaurants, and addresses I'd searched or navigated to, each tagged with how long ago. Location can be estimated via GPS, cell towers, Wi-Fi, Bluetooth, or IP — and because I'm signed in, all of it ties back to one identity alongside my search history and other Google activity. Individually the entries look mundane; together, they're enough to infer home, workplace, and routine. Consent here is real but shallow — people opt in for directions, not for a permanent, identity-linked movement log, and the controls to limit it (While Using the App, disabling Timeline) trade away the convenience that made the app worth using in the first place.</p>` },
+  { type:"act", slug:"buckcoin-proof-of-work", typeLabel:"Activity", title:"Mining a block by hand — proof of work isn't math, it's guessing",
+    blurb:"Mined a class blockchain block by trying serial numbers until a SHA-256 hash happened to start with 0 — proof that mining is brute-force search, not problem-solving.", wk:"Week 5", date:"2026-06",
+    body:`<p class="lead">Mining a block for a toy class blockchain (SHA-256 hash starting with a 0) made the mechanics of proof-of-work concrete in a way reading about it never did.</p><p>Each block string chains in the previous block's hash, so altering an earlier block breaks every hash after it — the tamper-evidence blockchain is known for. The serial number played the role of a nonce: there's no clever shortcut, just trying values until the hash happens to satisfy the condition. Changing that one number produced a completely unrelated hash each time — the avalanche effect, visible firsthand rather than asserted. Real Bitcoin mining is the same search against a vastly harder target, which is exactly why it costs so much compute and power: proof of work is provably-expensive guessing, not a puzzle with an insight to find.</p>` },
+  { type:"se", slug:"fuel-pump-night-shift", typeLabel:"Security Everywhere", title:"Authorising a fuel pump is a live human-in-the-loop control",
+    blurb:"Watching pumps from inside the shop at night made the authorisation delay visible for what it is: a real-time check (plate visible? no smoking? safe container?) before fuel flows.", wk:"Week 9", date:"2026-08",
+    body:`<p class="lead">A slight delay between lifting a pump nozzle and fuel actually flowing isn't a glitch — it's a person checking.</p><p>From inside the shop I watch the pump number, vehicle type, and the customer's behaviour before authorising: no visible plate, someone smoking, an unsafe container, or anything that looks wrong, and the pump can be locked with a word over the speaker instead. Lighting does its own quiet work here too — it's not a deterrent by itself, but it keeps both staff and the camera able to actually see the forecourt at night, which is a precondition for the human check working at all. It's a good small example of a control that's cheap, fast, and entirely dependent on a person paying attention in the loop, rather than something purely automated.</p>` },
+  { type:"act", slug:"birthday-attack-trailing-spaces", typeLabel:"Activity", title:"A birthday-attack collision hidden behind invisible spaces",
+    blurb:"Appended trailing spaces to two near-identical text files until their SHA-256 hashes matched on the last six hex digits — the hash function wasn't broken, only a truncated comparison was.", wk:"Week 9", date:"2026-08",
+    body:`<p class="lead">This activity's whole point was searching for <em>any</em> two matching hashes, not a hash matching one specific target — the actual birthday-attack setup, not a preimage search.</p><p>A small script appended trailing whitespace — invisible in a text editor, but real bytes to SHA-256 — to many copies each of a genuine and a fabricated file, and checked whether any pair's hashes agreed on their last six hex digits. Eventually two did. Nothing about SHA-256 was broken: the full 256-bit hashes were still completely different. The actual weakness was that only a truncated slice of the hash was ever being compared — six hex digits is a far smaller search space than the full digest, and a match at that size is exactly what the birthday bound predicts. It's a clean illustration of why "compare a shortened hash" is a much weaker check than it looks.</p>` },
   { type:"act", slug:"classical-ciphers-draft", typeLabel:"Activity", title:"Classical ciphers & the NSA decryption game", tmpl:true,
     blurb:"Draft — write up the cipher chosen, key, ciphertext produced, and what made some ciphers easier to crack than others.", wk:"Week 2", date:"2026-02",
     body:`<p class="lead">Draft.</p><div class="art-draft">To finish: which cipher you chose, the key and ciphertext you produced, and what made some ciphers in the decryption game easier to crack than others.</div>` },
 ];
 
 const EVENTS = [
+  { title:"SCONES — UNSW Security Conference", status:"attended", meta:"Security conference · Jun 2026",
+    desc:"Sat in on a talk on network segmentation and insider threat: why flat networks let one compromised device reach everything, and how VLANs (IEEE 802.1Q) give logical isolation on shared hardware without the cost of physically separate switches and cabling." },
   { title:"[Add a CTF or competition]", status:"to add", tmpl:true, meta:"CTFs · hackathons · meetups",
     desc:"When you enter a competition or attend a security event, add it here with the date and your result. Each one signals initiative beyond coursework." },
   { title:"[Add a meetup or workshop]", status:"to add", tmpl:true, meta:"community · talks",
@@ -652,7 +833,10 @@ document.getElementById('projects-list').innerHTML=PROJECTS.map(p=>`
     <div class="pstack">${p.stack.map(s=>`<span class="tag">${s}</span>`).join('')}</div>
     <div class="changelog"><div class="cl-h">Updates</div>
       ${p.updates.map(u=>`<div class="cl-item"><span class="cl-d">${u.d}</span><span class="cl-t">${u.t}</span></div>`).join('')}
-      <a class="prepo" href="${p.repo}" ${p.repo==="#"?'onclick="return false"':'target="_blank" rel="noopener"'}>repo ↗</a>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;">
+        <a class="prepo" href="${p.repo}" ${p.repo==="#"?'onclick="return false"':'target="_blank" rel="noopener"'}>repo ↗</a>
+        ${p.live?`<a class="prepo" href="${p.live}" target="_blank" rel="noopener">live ↗</a>`:''}
+      </div>
     </div>
   </div>`).join('');
 document.getElementById('p-count').textContent=PROJECTS.length+" projects";
