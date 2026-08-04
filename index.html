@@ -264,6 +264,16 @@ body.vp-mobile .main-content, body.vp-compact .main-content { margin-left: 0; pa
 .project-links { display: flex; gap: 10px; flex-wrap: wrap; }
 .project-link { font-size: .72rem; color: var(--text-secondary); transition: all .3s ease; display: inline-flex; align-items: center; gap: 6px; padding: 7px 10px; border: 1px solid rgba(255,255,255,.08); border-radius: 999px; background: rgba(255,255,255,.03); }
 .project-link:hover { color: var(--neon-blue); border-color: rgba(0,212,255,.3); text-shadow: 0 0 10px var(--neon-blue); }
+.case-toggle { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 10px; background: none; border: 1px dashed rgba(255,255,255,.14); border-radius: 8px; color: var(--text-secondary); font-family: inherit; font-size: .72rem; cursor: pointer; transition: all .25s ease; }
+.case-toggle:hover { color: var(--neon-red); border-color: rgba(255,43,61,.3); }
+.case-toggle iconify-icon { transition: transform .25s ease; }
+.case-toggle[aria-expanded="true"] iconify-icon { transform: rotate(180deg); }
+.case-study { display: none; padding: 4px 20px 18px; }
+.project-card.case-open .case-study { display: block; }
+.case-row { padding: 12px 0; border-top: 1px solid rgba(48,54,61,.6); }
+.case-row:first-child { border-top: none; }
+.case-label { display: block; font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; color: var(--neon-blue); margin-bottom: 6px; }
+.case-row p { font-size: .78rem; line-height: 1.75; color: var(--text-secondary); }
 
 /* BLOG (terminal-style field notes) */
 .blog-terminal { max-width: 900px; margin: 0 auto; background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015)), var(--bg-secondary); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; overflow: hidden; box-shadow: 0 22px 70px rgba(0,0,0,.35); }
@@ -296,6 +306,41 @@ body.vp-mobile .main-content, body.vp-compact .main-content { margin-left: 0; pa
 .event-title { color: var(--text-primary); font-size: .82rem; font-weight: 600; }
 .event-meta { font-size: .68rem; color: var(--text-dim); }
 .event-desc { flex-basis: 100%; font-size: .78rem; color: var(--text-secondary); line-height: 1.7; margin-top: 2px; }
+
+/* STATUS WIDGET */
+.status-terminal { max-width: 760px; margin: 0 auto; background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015)), var(--bg-secondary); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; overflow: hidden; box-shadow: 0 22px 70px rgba(0,0,0,.35); }
+.status-list { padding: 6px 10px; }
+.status-row { display: flex; align-items: center; gap: 14px; padding: 14px; border-bottom: 1px solid rgba(48,54,61,.6); }
+.status-row:last-child { border-bottom: none; }
+.status-pill { display: inline-flex; align-items: center; gap: 6px; font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; padding: 4px 10px; border-radius: 999px; flex-shrink: 0; }
+.status-pill .dot2 { width: 7px; height: 7px; border-radius: 50%; }
+.status-pill.up { color: var(--neon-red); background: rgba(255,43,61,.08); border: 1px solid rgba(255,43,61,.3); }
+.status-pill.up .dot2 { background: var(--neon-red); box-shadow: 0 0 6px var(--neon-red); }
+.status-pill.down { color: var(--text-dim); background: rgba(255,255,255,.03); border: 1px solid var(--border-color); }
+.status-pill.down .dot2 { background: var(--text-dim); }
+.status-name { flex: 1; min-width: 0; font-size: .82rem; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.status-latency { font-size: .74rem; color: var(--text-secondary); font-variant-numeric: tabular-nums; flex-shrink: 0; width: 58px; text-align: right; }
+.status-spark { flex-shrink: 0; }
+.status-spark path.line { fill: none; stroke: var(--neon-blue); stroke-width: 1.6; }
+.status-spark path.fill { fill: rgba(0,212,255,.12); stroke: none; }
+.status-spark circle { fill: var(--neon-blue); }
+.status-note { padding: 10px 20px 16px; font-size: .68rem; color: var(--text-dim); line-height: 1.7; }
+.status-loading { padding: 24px; text-align: center; font-size: .8rem; color: var(--text-dim); }
+
+/* RSA CRACK WIDGET */
+.crack-terminal { max-width: 760px; margin: 0 auto; background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015)), var(--bg-secondary); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; overflow: hidden; box-shadow: 0 22px 70px rgba(0,0,0,.35); }
+.crack-body { padding: 22px 24px 26px; }
+.crack-intro { font-size: .8rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 18px; }
+.crack-form { display: flex; flex-direction: column; gap: 14px; margin-bottom: 18px; }
+.crack-field { display: flex; flex-direction: column; gap: 6px; }
+.crack-field label { font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; color: var(--text-dim); }
+.crack-field input { background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 14px; color: var(--text-primary); font-family: inherit; font-size: .82rem; outline: none; transition: border-color .25s ease, box-shadow .25s ease; }
+.crack-field input:focus { border-color: var(--neon-red); box-shadow: 0 0 10px rgba(255,43,61,.2); }
+.crack-output { font-size: .82rem; line-height: 1.9; min-height: 20px; }
+.crack-output .crack-line { padding: 3px 0; word-break: break-word; }
+.crack-output .crack-ok { color: var(--neon-red); }
+.crack-output .crack-dim { color: var(--text-dim); }
+.crack-output .crack-msg { color: var(--text-primary); font-weight: 700; }
 
 /* PLAYGROUND TERMINAL */
 .fun-terminal { max-width: 760px; margin: 0 auto; background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015)), var(--bg-secondary); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; overflow: hidden; box-shadow: 0 22px 70px rgba(0,0,0,.35); transition: border-color .3s ease, box-shadow .3s ease; }
@@ -408,7 +453,9 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
       <li><a href="#experience" class="sidebar-link" data-tooltip="Experience"><iconify-icon icon="solar:case-round-bold"></iconify-icon><span>experience</span></a></li>
       <li><a href="#skills" class="sidebar-link" data-tooltip="Skills"><iconify-icon icon="solar:widget-5-bold"></iconify-icon><span>skills</span></a></li>
       <li><a href="#projects" class="sidebar-link" data-tooltip="Projects"><iconify-icon icon="solar:folder-with-files-bold"></iconify-icon><span>projects</span></a></li>
+      <li><a href="#crack" class="sidebar-link" data-tooltip="Crack RSA"><iconify-icon icon="solar:key-minimalistic-square-bold"></iconify-icon><span>crack rsa</span></a></li>
       <li><a href="#blog" class="sidebar-link" data-tooltip="Blog"><iconify-icon icon="solar:notebook-bold"></iconify-icon><span>blog</span></a></li>
+      <li><a href="#status" class="sidebar-link" data-tooltip="Status"><iconify-icon icon="solar:pulse-2-bold"></iconify-icon><span>status</span></a></li>
       <li><a href="#contact" class="sidebar-link" data-tooltip="Contact"><iconify-icon icon="solar:letter-bold"></iconify-icon><span>contact</span></a></li>
     </ul>
   </nav>
@@ -570,6 +617,12 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
             <a class="project-link" href="https://crackrsa.com" target="_blank" rel="noopener"><iconify-icon icon="solar:link-bold"></iconify-icon> live</a>
             <a class="project-link" href="https://github.com/iabhi92/shors-rsa-cracker" target="_blank" rel="noopener"><iconify-icon icon="mdi:github"></iconify-icon> repo</a>
           </div>
+          <button class="case-toggle" aria-expanded="false">See how it was built <iconify-icon icon="solar:alt-arrow-down-bold"></iconify-icon></button>
+        </div>
+        <div class="case-study">
+          <div class="case-row"><span class="case-label">problem</span><p>Anyone can claim a quantum simulator is correct. Trusting my own code to grade my own code isn't proof of anything.</p></div>
+          <div class="case-row"><span class="case-label">approach</span><p>Built the statevector simulator from scratch — gates, entanglement, QFT — then ran the same circuits through Google's Cirq and diffed the results state by state, not just eyeballing the output.</p></div>
+          <div class="case-row"><span class="case-label">result</span><p>Matched Cirq to floating-point precision across multiple configurations. The real IBM hardware run came back noisier, which is exactly the point — the simulator shows the ideal case, the hardware run shows what you actually get today.</p></div>
         </div>
       </div>
 
@@ -589,6 +642,12 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
             <a class="project-link" href="https://iabhi92.github.io/Crypto-Project/" target="_blank" rel="noopener"><iconify-icon icon="solar:link-bold"></iconify-icon> live</a>
             <a class="project-link" href="https://github.com/iabhi92/Crypto-Project" target="_blank" rel="noopener"><iconify-icon icon="mdi:github"></iconify-icon> repo</a>
           </div>
+          <button class="case-toggle" aria-expanded="false">See how it was built <iconify-icon icon="solar:alt-arrow-down-bold"></iconify-icon></button>
+        </div>
+        <div class="case-study">
+          <div class="case-row"><span class="case-label">problem</span><p>A "multi-party" signing demo is easy to fake — one shared JS array pretending to be three separate signers proves nothing about whether the protocol actually works across parties.</p></div>
+          <div class="case-row"><span class="case-label">approach</span><p>Ran each signer in a genuinely separate browser tab with no shared memory, talking only over BroadcastChannel — the same isolation real separate machines would have.</p></div>
+          <div class="case-row"><span class="case-label">result</span><p>k-of-n threshold signing works with real message-passing between isolated tabs, and every Winternitz signature and Merkle proof is computed live, not precomputed and just displayed.</p></div>
         </div>
       </div>
 
@@ -608,9 +667,39 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
             <a class="project-link" href="https://taskhavens.com" target="_blank" rel="noopener"><iconify-icon icon="solar:link-bold"></iconify-icon> live</a>
             <a class="project-link" href="https://github.com/iabhi92/haven-tasks" target="_blank" rel="noopener"><iconify-icon icon="mdi:github"></iconify-icon> repo</a>
           </div>
+          <button class="case-toggle" aria-expanded="false">See how it was built <iconify-icon icon="solar:alt-arrow-down-bold"></iconify-icon></button>
+        </div>
+        <div class="case-study">
+          <div class="case-row"><span class="case-label">problem</span><p>"We encrypt your data" is a line every app puts in its privacy policy. Almost none let you actually check it.</p></div>
+          <div class="case-row"><span class="case-label">approach</span><p>Built a "you vs. the server" panel that queries the real stored record and renders exactly what the backend has on disk — instead of asking you to just trust the claim.</p></div>
+          <div class="case-row"><span class="case-label">result</span><p>What the server sees is ciphertext, full stop. AES-256-GCM with a key derived via PBKDF2-SHA256 at 600,000 iterations means even a compromised backend has nothing readable to leak.</p></div>
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- RSA CRACK WIDGET -->
+  <section class="section" id="crack">
+    <div class="section-header reveal">
+      <div class="comment"><iconify-icon icon="solar:key-minimalistic-square-bold"></iconify-icon> // crack.py</div>
+      <h2>Break some <span class="neon-text">RSA</span>, right here</h2>
+    </div>
+    <div class="crack-terminal reveal">
+      <div class="terminal-header">
+        <div class="terminal-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span class="terminal-title"><iconify-icon icon="solar:key-minimalistic-square-bold" style="font-size:.9rem;"></iconify-icon> crack.py</span>
+      </div>
+      <div class="crack-body">
+        <p class="crack-intro">This factors n and decrypts the ciphertext for real, in your browser — nothing is sent anywhere. It's slow on purpose past a few trillion: that gap between "instant" and "not in your lifetime" is the entire reason RSA works. The prefilled example is a toy 12-bit key; find a stranger one somewhere on this site and paste it in.</p>
+        <div class="crack-form">
+          <div class="crack-field"><label for="crackN">n</label><input type="text" id="crackN" value="3233" inputmode="numeric" autocomplete="off"></div>
+          <div class="crack-field"><label for="crackE">e</label><input type="text" id="crackE" value="17" inputmode="numeric" autocomplete="off"></div>
+          <div class="crack-field"><label for="crackC">ciphertext (comma-separated, one block per character)</label><input type="text" id="crackC" value="3000, 1486" autocomplete="off"></div>
+        </div>
+        <button class="btn btn-primary" id="crackBtn"><iconify-icon icon="solar:bolt-bold"></iconify-icon> Factor &amp; decrypt</button>
+        <div class="crack-output" id="crackOutput" style="margin-top:16px;"></div>
+      </div>
     </div>
   </section>
 
@@ -629,6 +718,22 @@ footer.site-footer { padding: 30px 20px; border-top: 1px solid var(--border-colo
       <div class="events-list" id="eventsList"></div>
       <div class="blog-section-label">$ ls notes/</div>
       <div class="blog-list" id="blogList"></div>
+    </div>
+  </section>
+
+  <!-- STATUS -->
+  <section class="section" id="status">
+    <div class="section-header reveal">
+      <div class="comment"><iconify-icon icon="solar:pulse-2-bold"></iconify-icon> // status.sh</div>
+      <h2>Is it <span class="neon-text">actually up</span></h2>
+    </div>
+    <div class="status-terminal reveal">
+      <div class="terminal-header">
+        <div class="terminal-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span class="terminal-title"><iconify-icon icon="solar:pulse-2-bold" style="font-size:.9rem;"></iconify-icon> status --live</span>
+      </div>
+      <div class="status-list" id="statusList"><div class="status-loading">checking...</div></div>
+      <div class="status-note">Live check, not a claim — this backend actually pings each URL server-side on load. It runs on a free-tier dyno that sleeps when idle, so the first check after a quiet spell can take a few seconds while it wakes up, and history resets on a cold start.</div>
     </div>
   </section>
 
@@ -773,7 +878,7 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 }
 
 /* ============ ACTIVE NAV LINK ============ */
-const navSections = ['home','about','experience','skills','projects','blog','contact'].map(id => document.getElementById(id)).filter(Boolean);
+const navSections = ['home','about','experience','skills','projects','crack','blog','status','contact'].map(id => document.getElementById(id)).filter(Boolean);
 const navLinks = document.querySelectorAll('.sidebar-link');
 function updateActiveNav(){
   let current = navSections[0]?.id;
@@ -831,6 +936,144 @@ document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
 /* ============ SKILL BARS ============ */
 const skillIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); skillIO.unobserve(e.target); } }), { threshold: .4 });
 document.querySelectorAll('.skill-item').forEach(el => skillIO.observe(el));
+
+/* ============ PROJECT CASE STUDIES ============ */
+document.querySelectorAll('.case-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.project-card');
+    const nowOpen = !card.classList.contains('case-open');
+    card.classList.toggle('case-open', nowOpen);
+    btn.setAttribute('aria-expanded', String(nowOpen));
+    btn.innerHTML = (nowOpen ? 'Hide the build notes ' : 'See how it was built ') + '<iconify-icon icon="solar:alt-arrow-down-bold"></iconify-icon>';
+  });
+});
+
+/* ============ RSA CRACK WIDGET (real factoring + decryption, BigInt, client-side) ============ */
+function isqrtBig(n) {
+  if (n < 2n) return n;
+  let x = n, y = (x + 1n) / 2n;
+  while (y < x) { x = y; y = (x + n / x) / 2n; }
+  return x;
+}
+// Trial division up to sqrt(n), time-boxed -- this is deliberately the "dumb" classical
+// attack. It's the whole point of the widget: instant for a toy key, hopeless for a real
+// one, and that gap is what makes RSA work at real key sizes.
+function trialFactor(n, budgetMs) {
+  const start = performance.now();
+  if (n % 2n === 0n) return [2n, n / 2n];
+  const limit = isqrtBig(n);
+  for (let i = 3n; i <= limit; i += 2n) {
+    if ((i & 0xFFFn) === 0n && performance.now() - start > budgetMs) return null;
+    if (n % i === 0n) return [i, n / i];
+  }
+  return null;
+}
+function egcd(a, b) {
+  if (b === 0n) return [a, 1n, 0n];
+  const [g, x1, y1] = egcd(b, a % b);
+  return [g, y1, x1 - (a / b) * y1];
+}
+function modInv(e, phi) {
+  const [g, x] = egcd(e, phi);
+  if (g !== 1n) return null;
+  return ((x % phi) + phi) % phi;
+}
+function modPow(base, exp, mod) {
+  base %= mod;
+  let result = 1n;
+  while (exp > 0n) {
+    if (exp & 1n) result = (result * base) % mod;
+    exp >>= 1n;
+    base = (base * base) % mod;
+  }
+  return result;
+}
+function crackLine(text, cls) {
+  const div = document.createElement('div');
+  div.className = 'crack-line' + (cls ? ' ' + cls : '');
+  div.textContent = text;
+  return div;
+}
+document.getElementById('crackBtn').addEventListener('click', () => {
+  const out = document.getElementById('crackOutput');
+  out.innerHTML = '';
+  let n, e, blocks;
+  try {
+    n = BigInt(document.getElementById('crackN').value.trim());
+    e = BigInt(document.getElementById('crackE').value.trim());
+    blocks = document.getElementById('crackC').value.split(',').map(s => BigInt(s.trim()));
+  } catch {
+    out.appendChild(crackLine('Couldn’t parse that — n and e are single integers, ciphertext is comma-separated integers.', 'crack-dim'));
+    return;
+  }
+  if (n < 4n) { out.appendChild(crackLine('n is too small to be a real RSA modulus.', 'crack-dim')); return; }
+  out.appendChild(crackLine(`factoring n = ${n}...`, 'crack-dim'));
+  const factors = trialFactor(n, 4000);
+  if (!factors) {
+    out.appendChild(crackLine("Didn't factor in time. Either n is prime (invalid key) or it's genuinely too big for trial division in a browser tab — which is exactly why real RSA uses ~600-digit primes, not this.", 'crack-dim'));
+    return;
+  }
+  const [p, q] = factors;
+  out.appendChild(crackLine(`n = ${p} × ${q}`, 'crack-ok'));
+  const phi = (p - 1n) * (q - 1n);
+  const d = modInv(e, phi);
+  if (d === null) {
+    out.appendChild(crackLine(`e = ${e} isn't coprime with φ(n) = ${phi} — this isn't a valid key.`, 'crack-dim'));
+    return;
+  }
+  out.appendChild(crackLine(`φ(n) = ${phi}, d = ${d}`, 'crack-ok'));
+  try {
+    const chars = blocks.map(c => String.fromCharCode(Number(modPow(c, d, n))));
+    out.appendChild(crackLine(`decrypted: ${chars.join('')}`, 'crack-msg'));
+  } catch {
+    out.appendChild(crackLine('Factored the key, but the ciphertext blocks don’t decode to valid characters — double check they were encrypted with this exact n and e.', 'crack-dim'));
+  }
+});
+
+/* ============ STATUS WIDGET (real live check, fetched from the crackrsa.com backend) ============ */
+function sparklinePath(points) {
+  const w = 90, h = 28;
+  const upPoints = points.filter(p => p.up && p.latency_ms != null);
+  if (upPoints.length < 2) return null;
+  const values = upPoints.map(p => p.latency_ms);
+  const min = Math.min(...values), max = Math.max(...values);
+  const range = max - min || 1;
+  const step = w / (upPoints.length - 1);
+  const coords = upPoints.map((p, i) => {
+    const x = i * step;
+    const y = h - 4 - ((p.latency_ms - min) / range) * (h - 8);
+    return [x, y];
+  });
+  const line = coords.map(([x, y], i) => (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1)).join(' ');
+  const fill = line + ` L${w},${h} L0,${h} Z`;
+  const [lastX, lastY] = coords[coords.length - 1];
+  return { w, h, line, fill, lastX, lastY };
+}
+async function loadStatus() {
+  const list = document.getElementById('statusList');
+  try {
+    const res = await fetch('https://shors-rsa-cracker.onrender.com/api/status');
+    if (!res.ok) throw new Error('bad response');
+    const data = await res.json();
+    list.innerHTML = data.current.map(target => {
+      const hist = data.history[target.name] || [];
+      const spark = sparklinePath(hist);
+      const sparkSvg = spark
+        ? `<svg class="status-spark" width="${spark.w}" height="${spark.h}" viewBox="0 0 ${spark.w} ${spark.h}"><path class="fill" d="${spark.fill}"/><path class="line" d="${spark.line}"/><circle cx="${spark.lastX}" cy="${spark.lastY}" r="2.2"/></svg>`
+        : '';
+      return `
+        <div class="status-row">
+          <span class="status-pill ${target.up ? 'up' : 'down'}"><span class="dot2"></span>${target.up ? 'up' : 'down'}</span>
+          <span class="status-name">${target.name}</span>
+          ${sparkSvg}
+          <span class="status-latency">${target.latency_ms != null ? target.latency_ms + 'ms' : '—'}</span>
+        </div>`;
+    }).join('');
+  } catch {
+    list.innerHTML = '<div class="status-loading">Couldn’t reach the status API just now — the free-tier backend may be waking up. Refresh in a moment.</div>';
+  }
+}
+loadStatus();
 
 /* ============ CONTACT FORM (submits to Formspree, stays on-page) ============ */
 const contactForm = document.getElementById('contactForm');
@@ -1017,14 +1260,39 @@ function funPrintCmd(cmd) {
   line.querySelector('.command').textContent = cmd;
   funBody.appendChild(line);
 }
+const FILES = {
+  'about.js': '// see the about section — this file is just for show',
+  'experience.log': '// see the experience section',
+  'skills.json': '// see the skills section',
+  'contact.sh': '// see the contact section, or just email pinku2c@gmail.com',
+  'resume.pdf': "no PDF yet — email me and I'll send one over.",
+  '.challenge': [
+    '# rsa-mini.txt',
+    'public key: n=2773, e=17',
+    'ciphertext: 2248, 2063, 1017, 1924, 1528, 189, 2117, 32, 32, 2236, 189, 850, 850, 189, 193, 1020, 1684, 758, 189, 170, 758, 164',
+    'each number is one character, encrypted separately. factor n, find d, decrypt every block.',
+    'the crack widget further up this page will do the math once you have n, e, and the ciphertext.',
+  ],
+};
 const FUN_COMMANDS = {
-  help: () => { funPrint('Commands: help, todo, whoami, ls, resume, coffee, sudo, date, echo &lt;text&gt;, clear, contact, projects'); },
+  help: () => { funPrint('Commands: help, todo, whoami, ls, cat &lt;file&gt;, resume, coffee, sudo, date, echo &lt;text&gt;, clear, contact, projects, blog'); },
   todo: () => {
     funPrint('# things i actually want to get done');
     TODO_LIST.forEach(t => funPrint((t.done ? '[x] ' : '[ ] ') + t.text, t.done ? 'todo-done' : 'todo-open'));
   },
   whoami: () => { funPrint("guest — probably a recruiter, a friend, or someone who typed 'sudo'. hi 👋"); },
-  ls: () => { funPrint('about.js  experience.log  skills.json  projects/  blog/  contact.sh  resume.pdf'); },
+  ls: (args) => {
+    const visible = 'about.js  experience.log  skills.json  projects/  blog/  contact.sh  resume.pdf';
+    if (args.includes('-a')) funPrint('.  ..  .challenge  ' + visible);
+    else funPrint(visible);
+  },
+  cat: (args) => {
+    const f = args[0];
+    if (!f) { funPrint('usage: cat <file>', 'err'); return; }
+    const content = FILES[f];
+    if (content === undefined) { funPrint(`cat: ${f}: No such file or directory`, 'err'); return; }
+    (Array.isArray(content) ? content : [content]).forEach(line => funPrint(line));
+  },
   resume: () => { funPrint("no PDF yet — email me at pinku2c@gmail.com and I'll send one over."); },
   cv: () => FUN_COMMANDS.resume(),
   coffee: () => { funPrint('☕ brewing... done. productivity +1, sleep -1.'); },
@@ -1043,7 +1311,7 @@ funInput.addEventListener('keydown', e => {
   const [cmd, ...rest] = raw.split(/\s+/);
   const key = cmd.toLowerCase();
   if (key === 'echo') funPrint(rest.join(' ') || '');
-  else if (FUN_COMMANDS[key]) FUN_COMMANDS[key]();
+  else if (FUN_COMMANDS[key]) FUN_COMMANDS[key](rest);
   else funPrint(`command not found: ${cmd} — try `+`<span class="command">help</span>`, 'err');
   funInput.value = '';
   funBody.scrollTop = funBody.scrollHeight;
