@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iabhi92.online/sitemap.xml
