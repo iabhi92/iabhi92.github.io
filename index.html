@@ -72,47 +72,35 @@ a { color: inherit; text-decoration: none; }
 .back-to-top:hover { color: var(--accent); border-color: var(--accent-dim); }
 iconify-icon { display: inline-flex; vertical-align: middle; }
 
-/* SIDEBAR APP SHELL */
-.sidebar-overlay { display: none; position: fixed; inset: 0; z-index: 1090; background: rgba(4,5,7,.7); backdrop-filter: blur(3px); opacity: 0; transition: opacity .25s ease; pointer-events: none; }
-.mobile-topbar { display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 1101; height: var(--mobile-header-h); padding: 0 14px 0 18px; align-items: center; gap: 10px; background: var(--panel); border-bottom: 1px solid var(--border); }
-.mobile-topbar-brand { flex: 1; min-width: 0; font-family: var(--mono); font-size: 1rem; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.sidebar-toggle { display: none; flex-shrink: 0; width: 38px; height: 38px; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 8px; background: var(--panel-2); color: var(--ink-dim); cursor: pointer; }
-.sidebar-toggle iconify-icon { font-size: 1.25rem; }
+/* TOP BAR -- a plain text nav, not a dashboard sidebar */
+.topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 20px clamp(24px,5vw,80px); background: rgba(10,12,16,.72); backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color .2s ease, background .2s ease; }
+.topbar.scrolled { border-bottom-color: var(--border); }
+.topbar-brand { font-family: var(--mono); font-size: .92rem; font-weight: 700; color: var(--ink); }
+.topbar-brand .accent { color: var(--accent); }
+.topbar-nav { display: flex; align-items: center; gap: clamp(14px,2.4vw,30px); }
+.topbar-link { font-size: .85rem; color: var(--ink-dim); transition: color .2s ease; position: relative; }
+.topbar-link::after { content: ""; position: absolute; left: 0; bottom: -4px; width: 0; height: 1px; background: var(--accent); transition: width .2s ease; }
+.topbar-link:hover, .topbar-link.active { color: var(--ink); }
+.topbar-link.active::after { width: 100%; }
+.topbar-social { display: flex; align-items: center; gap: 10px; }
+.topbar-social .social-link { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; color: var(--ink-dim); transition: color .2s ease; font-size: 1.05rem; }
+.topbar-social .social-link:hover { color: var(--accent); }
+.topbar-toggle { display: none; width: 36px; height: 36px; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 7px; background: var(--panel-2); color: var(--ink-dim); cursor: pointer; }
 .toggle-icon-close { display: none; }
-body.sidebar-open .toggle-icon-open { display: none; }
-body.sidebar-open .toggle-icon-close { display: inline-flex; }
-.sidebar { position: fixed; top: 0; left: 0; z-index: 1100; display: flex; flex-direction: column; width: var(--sidebar-w); height: 100vh; height: 100dvh; padding: 26px 20px 20px; background: var(--panel); border-right: 1px solid var(--border); transition: transform .28s ease, width .25s ease; overflow: hidden; }
-.sidebar-header { margin-bottom: 30px; }
-.sidebar-logo { font-family: var(--mono); font-size: 1rem; font-weight: 700; color: var(--ink); }
-.sidebar-logo .accent { color: var(--accent); }
-.sidebar-nav { flex: 1; overflow-y: auto; }
-.sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-.sidebar-link { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 6px; color: var(--ink-dim); font-size: .86rem; font-weight: 500; border-left: 2px solid transparent; transition: color .2s ease, background .2s ease, border-color .2s ease; }
-.sidebar-link iconify-icon { font-size: 1.15rem; flex-shrink: 0; opacity: .8; }
-.sidebar-link:hover { color: var(--ink); background: var(--panel-2); }
-.sidebar-link.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent-wash); }
-.sidebar-footer { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 14px; }
-.sidebar-status { display: flex; align-items: center; gap: 8px; font-size: .72rem; color: var(--ink-faint); }
-.status-dot { width: 6px; height: 6px; background: var(--good); border-radius: 50%; flex-shrink: 0; }
-.sidebar-social { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.sidebar-social .social-link { width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; border: 1px solid var(--border); color: var(--ink-dim); transition: color .2s ease, border-color .2s ease; }
-.sidebar-social .social-link:hover { color: var(--accent); border-color: var(--accent-dim); }
-.main-content { margin-left: var(--sidebar-w); position: relative; min-height: 100vh; min-height: 100dvh; transition: margin-left .25s ease; }
-body.sidebar-open { overflow: hidden; }
-body.sidebar-open .sidebar-overlay { display: block; opacity: 1; pointer-events: auto; }
-body.vp-tablet .sidebar { width: var(--sidebar-w-icon); padding: 20px 10px; }
-body.vp-tablet .sidebar-link span, body.vp-tablet .sidebar-status span { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
-body.vp-tablet .sidebar-logo { text-align: center; font-size: .8rem; }
-body.vp-tablet .sidebar-link { justify-content: center; padding: 10px 6px; }
-body.vp-tablet .sidebar-link[data-tooltip]:hover::after { content: attr(data-tooltip); position: absolute; left: calc(100% + 10px); top: 50%; transform: translateY(-50%); padding: 5px 9px; border-radius: 6px; background: var(--panel-2); border: 1px solid var(--border); color: var(--ink); font-size: .7rem; white-space: nowrap; z-index: 1200; pointer-events: none; }
-body.vp-tablet .sidebar-footer, body.vp-tablet .sidebar-status, body.vp-tablet .sidebar-social { justify-content: center; }
-body.vp-tablet .main-content { margin-left: var(--sidebar-w-icon); }
-body.vp-mobile .mobile-topbar, body.vp-compact .mobile-topbar { display: flex; }
-body.vp-mobile .sidebar-toggle, body.vp-compact .sidebar-toggle { display: inline-flex; }
-body.vp-mobile .sidebar, body.vp-compact .sidebar { top: var(--mobile-header-h); width: min(270px,84vw); height: calc(100vh - var(--mobile-header-h)); height: calc(100dvh - var(--mobile-header-h)); transform: translateX(-105%); box-shadow: 14px 0 50px rgba(0,0,0,.4); }
-body.vp-mobile .sidebar-overlay, body.vp-compact .sidebar-overlay { top: var(--mobile-header-h); }
-body.vp-mobile.sidebar-open .sidebar, body.vp-compact.sidebar-open .sidebar { transform: translateX(0); }
-body.vp-mobile .main-content, body.vp-compact .main-content { margin-left: 0; padding-top: var(--mobile-header-h); }
+body.nav-open .toggle-icon-open { display: none; }
+body.nav-open .toggle-icon-close { display: inline-flex; }
+.mobile-nav { display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 999; background: var(--panel); border-bottom: 1px solid var(--border); padding: 10px clamp(24px,5vw,80px) 20px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: all .2s ease; }
+body.nav-open .mobile-nav { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.mobile-nav ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.mobile-nav a { display: block; padding: 11px 4px; color: var(--ink-dim); font-size: .9rem; border-bottom: 1px solid var(--border); }
+.mobile-nav li:last-child a { border-bottom: none; }
+.mobile-nav a.active { color: var(--accent); }
+.main-content { position: relative; min-height: 100vh; min-height: 100dvh; padding-top: 76px; }
+@media (max-width: 900px) {
+  .topbar-nav, .topbar-social { display: none; }
+  .topbar-toggle { display: inline-flex; }
+  .mobile-nav { display: block; }
+}
 
 /* SECTION SCAFFOLDING -- no centered badge/pill formula, left-aligned editorial rhythm */
 .section { padding: var(--section-py) clamp(24px,5vw,80px); max-width: var(--maxw); margin: 0 auto; position: relative; }
@@ -183,10 +171,12 @@ body.vp-mobile .main-content, body.vp-compact .main-content { margin-left: 0; pa
 .exp-list li::before { content: "–"; position: absolute; left: 0; color: var(--ink-faint); }
 
 /* SKILLS */
-.skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 36px; }
-.skill-group-name { font-family: var(--mono); font-size: .78rem; color: var(--accent); margin-bottom: 14px; }
+.skills-grid { display: flex; flex-direction: column; gap: 22px; max-width: 780px; }
+.skills-grid > div { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.skills-grid > div:last-child { border-bottom: none; padding-bottom: 0; }
+.skill-group-name { font-family: var(--mono); font-size: .78rem; color: var(--accent); flex: 0 0 150px; }
 .skills-grid > div:nth-child(2) .skill-group-name { color: var(--accent2); }
-.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; min-width: 200px; }
 .skill-tag { font-size: .82rem; color: var(--ink-dim); padding: 6px 12px; border: 1px solid var(--border); border-radius: 5px; }
 
 /* PROJECTS -- vertical editorial list, not identical card grid */
@@ -330,13 +320,13 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
 
 @media (max-width:1024px) {
   .about-grid { grid-template-columns: 1fr; }
-  .skills-grid { grid-template-columns: repeat(2,1fr); }
   .project-cols { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .hero-grid { grid-template-columns: 1fr; }
 }
 @media (max-width:640px) {
-  .skills-grid { grid-template-columns: 1fr; }
+  .skills-grid > div { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .skill-group-name { flex-basis: auto; }
   .footer-content { flex-direction: column; align-items: flex-start; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -348,42 +338,39 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
 
 <a href="#main-content" class="skip-link">Skip to content</a>
 
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-<div class="mobile-topbar">
-  <a href="#home" class="mobile-topbar-brand">abhinav<span style="color:var(--accent)">.</span>kumar</a>
-  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation" aria-expanded="false">
+<header class="topbar" id="topbar">
+  <a href="#home" class="topbar-brand">abhinav<span class="accent">.</span>kumar</a>
+  <nav class="topbar-nav" id="topbarNav">
+    <a href="#about" class="topbar-link">about</a>
+    <a href="#experience" class="topbar-link">experience</a>
+    <a href="#skills" class="topbar-link">skills</a>
+    <a href="#projects" class="topbar-link">projects</a>
+    <a href="#crack" class="topbar-link">crack</a>
+    <a href="#blog" class="topbar-link">blog</a>
+    <a href="#status" class="topbar-link">status</a>
+    <a href="#contact" class="topbar-link">contact</a>
+  </nav>
+  <div class="topbar-social">
+    <a href="https://github.com/iabhi92" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub"><iconify-icon icon="mdi:github"></iconify-icon></a>
+    <a href="https://www.linkedin.com/in/iabhi92/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+  </div>
+  <button class="topbar-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
     <iconify-icon class="toggle-icon-open" icon="solar:hamburger-menu-outline"></iconify-icon>
     <iconify-icon class="toggle-icon-close" icon="solar:close-circle-outline"></iconify-icon>
   </button>
-</div>
-
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <a href="#home" class="sidebar-logo">abhinav<span class="accent">.</span>kumar</a>
-  </div>
-  <nav class="sidebar-nav">
-    <ul class="sidebar-links">
-      <li><a href="#home" class="sidebar-link active" data-tooltip="Home"><iconify-icon icon="solar:home-2-linear"></iconify-icon><span>home</span></a></li>
-      <li><a href="#about" class="sidebar-link" data-tooltip="About"><iconify-icon icon="solar:user-id-linear"></iconify-icon><span>about</span></a></li>
-      <li><a href="#experience" class="sidebar-link" data-tooltip="Experience"><iconify-icon icon="solar:case-round-linear"></iconify-icon><span>experience</span></a></li>
-      <li><a href="#skills" class="sidebar-link" data-tooltip="Skills"><iconify-icon icon="solar:widget-5-linear"></iconify-icon><span>skills</span></a></li>
-      <li><a href="#projects" class="sidebar-link" data-tooltip="Projects"><iconify-icon icon="solar:folder-linear"></iconify-icon><span>projects</span></a></li>
-      <li><a href="#crack" class="sidebar-link" data-tooltip="Crack RSA"><iconify-icon icon="solar:key-minimalistic-square-linear"></iconify-icon><span>crack rsa</span></a></li>
-      <li><a href="#blog" class="sidebar-link" data-tooltip="Blog"><iconify-icon icon="solar:notebook-linear"></iconify-icon><span>blog</span></a></li>
-      <li><a href="#status" class="sidebar-link" data-tooltip="Status"><iconify-icon icon="solar:pulse-2-linear"></iconify-icon><span>status</span></a></li>
-      <li><a href="#contact" class="sidebar-link" data-tooltip="Contact"><iconify-icon icon="solar:letter-linear"></iconify-icon><span>contact</span></a></li>
-    </ul>
-  </nav>
-  <div class="sidebar-footer">
-    <div class="sidebar-status"><span class="status-dot"></span><span>Sydney, AU</span></div>
-    <div class="sidebar-social">
-      <a href="https://github.com/iabhi92" target="_blank" rel="noopener noreferrer" class="social-link" data-tooltip="GitHub" aria-label="GitHub"><iconify-icon icon="mdi:github"></iconify-icon></a>
-      <a href="https://www.linkedin.com/in/iabhi92/" target="_blank" rel="noopener noreferrer" class="social-link" data-tooltip="LinkedIn" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
-      <a href="mailto:pinku2c@gmail.com" class="social-link" data-tooltip="Email" aria-label="Email"><iconify-icon icon="solar:letter-linear"></iconify-icon></a>
-    </div>
-  </div>
-</aside>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#about" class="mobile-nav-link">about</a></li>
+    <li><a href="#experience" class="mobile-nav-link">experience</a></li>
+    <li><a href="#skills" class="mobile-nav-link">skills</a></li>
+    <li><a href="#projects" class="mobile-nav-link">projects</a></li>
+    <li><a href="#crack" class="mobile-nav-link">crack rsa</a></li>
+    <li><a href="#blog" class="mobile-nav-link">blog</a></li>
+    <li><a href="#status" class="mobile-nav-link">status</a></li>
+    <li><a href="#contact" class="mobile-nav-link">contact</a></li>
+  </ul>
+</nav>
 
 <main class="main-content" id="main-content">
 
@@ -713,33 +700,19 @@ const backToTop = document.getElementById('backToTop');
 window.addEventListener('scroll', () => backToTop.classList.toggle('show', window.scrollY > 600), { passive: true });
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-/* ============ VIEWPORT MODE ============ */
-function setViewportClass(){
-  const w = window.innerWidth;
-  const b = document.body;
-  b.classList.remove('vp-desktop','vp-laptop','vp-tablet','vp-mobile','vp-compact');
-  if (w >= 1200) b.classList.add('vp-desktop');
-  else if (w >= 992) b.classList.add('vp-laptop');
-  else if (w >= 768) b.classList.add('vp-tablet');
-  else if (w >= 420) b.classList.add('vp-mobile');
-  else b.classList.add('vp-compact');
-}
-setViewportClass();
-let vpTimer;
-window.addEventListener('resize', () => { clearTimeout(vpTimer); vpTimer = setTimeout(setViewportClass, 120); });
+/* ============ TOPBAR: scroll shadow + mobile nav toggle ============ */
+const topbar = document.getElementById('topbar');
+window.addEventListener('scroll', () => topbar.classList.toggle('scrolled', window.scrollY > 8), { passive: true });
 
-/* ============ SIDEBAR TOGGLE ============ */
-const sidebarToggle = document.getElementById('sidebarToggle');
-const sidebarOverlay = document.getElementById('sidebarOverlay');
-function closeSidebar(){ document.body.classList.remove('sidebar-open'); sidebarToggle.setAttribute('aria-expanded','false'); }
-function openSidebar(){ document.body.classList.add('sidebar-open'); sidebarToggle.setAttribute('aria-expanded','true'); }
-sidebarToggle.addEventListener('click', () => document.body.classList.contains('sidebar-open') ? closeSidebar() : openSidebar());
-sidebarOverlay.addEventListener('click', closeSidebar);
-document.querySelectorAll('.sidebar-link').forEach(l => l.addEventListener('click', closeSidebar));
+const navToggle = document.getElementById('navToggle');
+function closeMobileNav(){ document.body.classList.remove('nav-open'); navToggle.setAttribute('aria-expanded','false'); }
+function openMobileNav(){ document.body.classList.add('nav-open'); navToggle.setAttribute('aria-expanded','true'); }
+navToggle.addEventListener('click', () => document.body.classList.contains('nav-open') ? closeMobileNav() : openMobileNav());
+document.querySelectorAll('.mobile-nav-link').forEach(l => l.addEventListener('click', closeMobileNav));
 
 /* ============ ACTIVE NAV LINK ============ */
 const navSections = ['home','about','experience','skills','projects','crack','blog','status','contact'].map(id => document.getElementById(id)).filter(Boolean);
-const navLinks = document.querySelectorAll('.sidebar-link');
+const navLinks = document.querySelectorAll('.topbar-link, .mobile-nav-link');
 function updateActiveNav(){
   let current = navSections[0]?.id;
   for (const s of navSections) { if (window.scrollY >= s.offsetTop - 140) current = s.id; }
