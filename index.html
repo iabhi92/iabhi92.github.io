@@ -205,6 +205,17 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .live-strip-body strong { color: var(--ink); font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { .live-strip-label::before { animation: none; } }
 
+/* ENGINEERING PHILOSOPHY */
+.philosophy-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 28px; }
+.philosophy-item { border-top: 2px solid var(--accent); padding-top: 16px; }
+.philosophy-item:nth-child(2) { border-top-color: var(--accent2); }
+.philosophy-item:nth-child(4) { border-top-color: var(--accent2); }
+.philosophy-step { font-size: .72rem; color: var(--ink-faint); margin-bottom: 10px; }
+.philosophy-item h3 { font-size: 1.05rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.philosophy-item p { font-size: .85rem; color: var(--ink-dim); line-height: 1.6; }
+@media (max-width:900px) { .philosophy-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width:480px) { .philosophy-grid { grid-template-columns: 1fr; } }
+
 /* EXPERIENCE */
 .exp-item { border-left: 2px solid var(--accent); padding: 4px 0 4px 22px; position: relative; }
 .exp-item::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
@@ -242,6 +253,8 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .project-file { font-family: var(--mono); font-size: .78rem; color: var(--ink-faint); }
 .project-content { display: flex; flex-direction: column; gap: 16px; }
 .project-summary { font-size: 1.02rem; color: var(--ink); }
+.project-why { font-size: .85rem; color: var(--ink-dim); margin-top: 6px; margin-bottom: 14px; }
+.project-why strong { color: var(--accent); font-weight: 600; }
 .project-highlights { list-style: none; display: flex; flex-direction: column; gap: 9px; }
 .project-highlights li { font-size: .85rem; color: var(--ink-dim); line-height: 1.7; padding-left: 16px; position: relative; }
 .project-highlights li::before { content: "–"; position: absolute; left: 0; color: var(--ink-faint); }
@@ -320,6 +333,16 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .blog-full p:last-child { margin-bottom: 0; }
 .blog-full strong { color: var(--accent); }
 .blog-full em { color: var(--ink); font-style: normal; }
+
+/* CHANGED MY MIND */
+.mindshift-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.mindshift-item { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; }
+.mindshift-col { background: var(--panel); padding: 20px 22px; }
+.mindshift-col.mindshift-after { background: var(--panel-2); }
+.mindshift-label { display: block; font-family: var(--mono); font-size: .68rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+.mindshift-after .mindshift-label { color: var(--accent2); }
+.mindshift-col p { font-size: .92rem; color: var(--ink); line-height: 1.6; }
+@media (max-width:640px) { .mindshift-item { grid-template-columns: 1fr; } }
 
 /* STATUS */
 .status-summary { display: flex; gap: 28px; flex-wrap: wrap; }
@@ -454,10 +477,11 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
     <div class="hero-grid">
       <div class="hero-text">
         <div class="hero-eyebrow mono">Sydney, Australia</div>
-        <h1>Most of what's on this page started as something that <em>didn't work</em>.</h1>
-        <p class="hero-sub">Three things I've actually shipped: RSA factored by hand and on real IBM quantum hardware, a threshold-signature scheme built from a 2024 paper, and a task app that can't read your data even if it wanted to. The rest of my time goes to CTFs — mostly web and binary exploitation.</p>
+        <h1>I build secure software. Then I <em>prove</em> it works.</h1>
+        <p class="hero-sub">I'm Abhinav Kumar, a software engineer focused on backend engineering, applied cryptography, and security. I build production systems, explore offensive security through CTFs, and enjoy understanding why software fails just as much as making it work.</p>
         <div class="hero-btns">
-          <a href="#projects" class="btn btn-primary"><iconify-icon icon="solar:folder-linear"></iconify-icon> See the work</a>
+          <a href="#projects" class="btn btn-primary"><iconify-icon icon="solar:folder-linear"></iconify-icon> View projects</a>
+          <a href="resume.pdf" target="_blank" class="btn btn-outline"><iconify-icon icon="solar:file-text-linear"></iconify-icon> Resume</a>
           <a href="#contact" class="btn btn-outline"><iconify-icon icon="solar:letter-linear"></iconify-icon> Get in touch</a>
         </div>
       </div>
@@ -481,6 +505,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <section class="section" id="about">
     <div class="section-eyebrow mono reveal">about</div>
     <h2 class="reveal">Who's writing <em>this</em></h2>
+    <p class="section-intro reveal">I like understanding systems from both sides. Building software is only half the job — the other half is asking what assumptions it depends on, what happens when those assumptions fail, and whether I can actually explain why. That's taken me through backend development, applied cryptography, quantum computing experiments, and offensive security. When I'm not building products, I'm usually solving CTF challenges or implementing ideas from research papers just to see how they actually work.</p>
     <div class="about-grid" style="margin-top:36px;">
       <div class="code-panel reveal">
         <div class="code-panel-label">about.js</div>
@@ -500,6 +525,34 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
         <div class="stat-tile"><div class="stat-num" data-count-to="10" data-suffix="+">0</div><div class="stat-label">vulnerability classes explored, hands-on</div></div>
         <div class="stat-tile"><div class="stat-num" data-count-to="116" data-suffix="+">0</div><div class="stat-label">automated tests across those products</div></div>
         <div class="stat-tile"><div class="stat-num" data-count-to="100" data-suffix="%">0</div><div class="stat-label">client-side encrypted — that's Haven, not a slogan</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGINEERING PHILOSOPHY -->
+  <section class="section" id="philosophy">
+    <div class="section-eyebrow mono reveal">philosophy</div>
+    <h2 class="reveal">How I <em>work</em></h2>
+    <div class="philosophy-grid" style="margin-top:36px;">
+      <div class="philosophy-item reveal">
+        <div class="philosophy-step mono">01</div>
+        <h3>Build</h3>
+        <p>Start with the smallest thing that actually works.</p>
+      </div>
+      <div class="philosophy-item reveal">
+        <div class="philosophy-step mono">02</div>
+        <h3>Measure</h3>
+        <p>If it can't be tested, it isn't finished.</p>
+      </div>
+      <div class="philosophy-item reveal">
+        <div class="philosophy-step mono">03</div>
+        <h3>Break</h3>
+        <p>Understand how attackers, users, and reality will abuse it.</p>
+      </div>
+      <div class="philosophy-item reveal">
+        <div class="philosophy-step mono">04</div>
+        <h3>Improve</h3>
+        <p>Good software survives contact with real people.</p>
       </div>
     </div>
   </section>
@@ -550,7 +603,8 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <!-- PROJECTS -->
   <section class="section" id="projects">
     <div class="section-eyebrow mono reveal">projects</div>
-    <h2 class="reveal">Projects that <em>ship</em></h2>
+    <h2 class="reveal">Projects that taught me <em>something</em></h2>
+    <p class="section-intro reveal">Not everything I've built belongs here. These do — each one because it forced me to actually understand something, not just use it.</p>
 
     <div class="project-row reveal">
       <div class="project-visual" aria-hidden="true">
@@ -578,6 +632,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
           <span class="project-file mono">shors-rsa-cracker.py</span>
         </div>
         <p class="project-summary">Factored RSA moduli by hand, then classically, then on IBM's real quantum hardware.</p>
+        <p class="project-why"><strong>Why:</strong> I wanted to understand why RSA actually breaks, not just read that it does.</p>
         <ul class="project-highlights">
           <li>Built a quantum statevector simulator from scratch and checked it bit-for-bit against Google Cirq</li>
           <li>Ran actual period-finding on IBM quantum hardware, not just a simulator</li>
@@ -627,6 +682,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
           <span class="project-file mono">threshold_signatures.py</span>
         </div>
         <p class="project-summary">Kelsey, Lang &amp; Lucks published this threshold-signature scheme in 2024. I built it.</p>
+        <p class="project-why"><strong>Why:</strong> papers get a lot clearer once you've had to debug them.</p>
         <ul class="project-highlights">
           <li>Winternitz one-time signatures and Merkle trees, no elliptic curves or RSA anywhere</li>
           <li>k-of-n signing demoed across real separate browser tabs over BroadcastChannel</li>
@@ -676,6 +732,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
           <span class="project-file mono">haven.js</span>
         </div>
         <p class="project-summary">Every task is encrypted before Haven's server ever sees it — and there's a page that proves exactly that.</p>
+        <p class="project-why"><strong>Why:</strong> I wanted to know what "zero-knowledge" actually means in practice, not just in a whitepaper.</p>
         <ul class="project-highlights">
           <li>AES-256-GCM client-side, key derived via PBKDF2-SHA256 at 600,000 iterations</li>
           <li>No account, works fully offline, nothing readable ever touches the network</li>
@@ -726,13 +783,33 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
 
   <!-- BLOG -->
   <section class="section" id="blog">
-    <div class="section-eyebrow mono reveal">blog.log</div>
-    <h2 class="reveal">Notes from the <em>field</em></h2>
+    <div class="section-eyebrow mono reveal">engineering notes</div>
+    <h2 class="reveal">Things worth <em>writing down</em></h2>
     <div class="panel reveal" style="margin-top:36px;">
       <div class="blog-section-label">$ ls events/</div>
       <div class="events-list" id="eventsList"></div>
       <div class="blog-section-label">$ ls notes/</div>
       <div class="blog-list" id="blogList"></div>
+    </div>
+  </section>
+
+  <!-- CHANGED MY MIND -->
+  <section class="section" id="changed-mind">
+    <div class="section-eyebrow mono reveal">reflection</div>
+    <h2 class="reveal">Things I changed my <em>mind</em> about</h2>
+    <div class="mindshift-list" style="margin-top:36px;">
+      <div class="mindshift-item reveal">
+        <div class="mindshift-col"><span class="mindshift-label">I used to think</span><p>AES was the hard part of secure software.</p></div>
+        <div class="mindshift-col mindshift-after"><span class="mindshift-label">I learned</span><p>Key management, recovery, UX, and threat modelling are where the real work begins.</p></div>
+      </div>
+      <div class="mindshift-item reveal">
+        <div class="mindshift-col"><span class="mindshift-label">I used to think</span><p>Reading a cryptography paper meant understanding it.</p></div>
+        <div class="mindshift-col mindshift-after"><span class="mindshift-label">I learned</span><p>Implementing it reveals every assumption the paper quietly skips.</p></div>
+      </div>
+      <div class="mindshift-item reveal">
+        <div class="mindshift-col"><span class="mindshift-label">I used to think</span><p>A quantum computer would make short work of real RSA keys.</p></div>
+        <div class="mindshift-col mindshift-after"><span class="mindshift-label">I learned</span><p>Today's hardware can barely factor toy numbers — the gap between "possible in theory" and "possible today" is enormous.</p></div>
+      </div>
     </div>
   </section>
 
@@ -1032,12 +1109,16 @@ const BLOG_POSTS = [
     body: `<p class="lead">Walk into any supermarket and you're surrounded by unguarded, easily-pocketed stock. That's not an oversight — it's a risk decision.</p><p>Locking everything down would cost more in friction and lost sales than the shrinkage it would prevent. So shops accept a tolerable level of theft and spend instead on cheap deterrents: cameras, sightlines, the occasional checkpoint. It's the same calculus security teams run every day — you don't prevent every risk, you spend where prevention is cheaper than the loss.</p>` },
 ];
 const TAG_LABEL = { se: 'security everywhere', act: 'activity', case: 'case study' };
+function readingMinutes(html) {
+  const words = html.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
 const blogListEl = document.getElementById('blogList');
 blogListEl.innerHTML = BLOG_POSTS.map(p => `
   <div class="blog-entry" data-slug="${p.slug}">
     <button class="blog-row" aria-expanded="false" aria-controls="blog-body-${p.slug}">
       <span class="blog-cmd"><span class="prompt">$</span> cat <span class="blog-slug">${p.slug}.md</span></span>
-      <span class="blog-meta"><span class="blog-tag">${TAG_LABEL[p.type]}</span><span>${p.week} &middot; ${p.date}</span></span>
+      <span class="blog-meta"><span class="blog-tag">${TAG_LABEL[p.type]}</span><span>${readingMinutes(p.body)} min read</span><span>${p.week} &middot; ${p.date}</span></span>
       <iconify-icon class="blog-chevron" icon="solar:alt-arrow-down-linear"></iconify-icon>
     </button>
     <div class="blog-body" id="blog-body-${p.slug}">
