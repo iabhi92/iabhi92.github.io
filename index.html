@@ -15,25 +15,30 @@
 <meta name="twitter:title" content="Abhinav Kumar">
 <meta name="twitter:description" content="RSA factored by hand and on real IBM quantum hardware. Three shipped products, hands-on CTF work.">
 <link rel="canonical" href="https://iabhi92.online/">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Abhinav Kumar","url":"https://iabhi92.online/","email":"pinku2c@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Sydney","addressCountry":"AU"},"sameAs":["https://github.com/iabhi92","https://www.linkedin.com/in/iabhi92/"],"knowsAbout":["Full-Stack Development","Web Security","Cryptography","Binary Exploitation","Python","React"]}
 </script>
 <style>
 :root {
-  --bg: #0d0f12;
-  --panel: #15181d;
-  --panel-2: #1a1e24;
-  --border: #262b33;
-  --ink: #e7e9ec;
-  --ink-dim: #9aa0ab;
-  --ink-faint: #5b6270;
+  --bg: #15110d;
+  --bg-alt: #1a1510;
+  --panel: #1f1912;
+  --panel-2: #251e15;
+  --border: #3a2f21;
+  --ink: #f2ece1;
+  --ink-dim: #b7a996;
+  --ink-faint: #756a5a;
   --accent: #d38a45;
   --accent-dim: #a86b34;
-  --accent-wash: rgba(211,138,69,.1);
-  --good: #4caf7d;
+  --accent-wash: rgba(211,138,69,.12);
+  --accent2: #4f9d8f;
+  --accent2-dim: #3a7a6f;
+  --accent2-wash: rgba(79,157,143,.12);
+  --good: #5cb586;
   --bad: #d1524a;
+  --serif: "Source Serif 4", Georgia, serif;
   --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
   --radius: 8px;
@@ -41,14 +46,21 @@
   --sidebar-w: 240px;
   --sidebar-w-icon: 72px;
   --mobile-header-h: 56px;
-  --section-py: 88px;
+  --section-py: 96px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--border) var(--bg); }
 html::-webkit-scrollbar { width: 8px; }
 html::-webkit-scrollbar-track { background: var(--bg); }
 html::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-body { font-family: var(--sans); background: var(--bg); color: var(--ink); overflow-x: hidden; line-height: 1.5; }
+body {
+  font-family: var(--sans); background: var(--bg); color: var(--ink); overflow-x: hidden; line-height: 1.5;
+  background-image:
+    radial-gradient(ellipse 900px 500px at 12% -10%, rgba(211,138,69,.07), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 15%, rgba(79,157,143,.06), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+}
 a { color: inherit; text-decoration: none; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
 .mono { font-family: var(--mono); }
@@ -103,18 +115,23 @@ body.vp-mobile.sidebar-open .sidebar, body.vp-compact.sidebar-open .sidebar { tr
 body.vp-mobile .main-content, body.vp-compact .main-content { margin-left: 0; padding-top: var(--mobile-header-h); }
 
 /* SECTION SCAFFOLDING -- no centered badge/pill formula, left-aligned editorial rhythm */
-.section { padding: var(--section-py) clamp(24px,5vw,80px); max-width: var(--maxw); margin: 0 auto; }
-.section-eyebrow { font-family: var(--mono); font-size: .78rem; color: var(--accent); margin-bottom: 10px; }
-.section h2 { font-size: clamp(1.6rem,3.6vw,2.3rem); font-weight: 700; letter-spacing: -.01em; color: var(--ink); max-width: 44ch; text-wrap: balance; }
-.section-intro { color: var(--ink-dim); max-width: 60ch; margin-top: 12px; font-size: .95rem; line-height: 1.7; }
+.section { padding: var(--section-py) clamp(24px,5vw,80px); max-width: var(--maxw); margin: 0 auto; position: relative; }
+.section-eyebrow { font-family: var(--mono); font-size: .8rem; color: var(--accent); margin-bottom: 14px; letter-spacing: .02em; }
+.section:nth-of-type(even) .section-eyebrow { color: var(--accent2); }
+.section h2 { font-size: clamp(2rem,4.4vw,3rem); font-weight: 700; letter-spacing: -.015em; line-height: 1.15; color: var(--ink); max-width: 28ch; text-wrap: balance; }
+.section h2 em { font-family: var(--serif); font-style: italic; font-weight: 500; color: var(--accent); }
+.section:nth-of-type(even) h2 em { color: var(--accent2); }
+.section-intro { color: var(--ink-dim); max-width: 60ch; margin-top: 14px; font-size: 1rem; line-height: 1.7; }
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* HERO */
-.hero-section { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; padding: 90px clamp(24px,5vw,80px) 60px; }
-.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px,5vw,64px); max-width: var(--maxw); margin: 0 auto; width: 100%; align-items: center; }
-.hero-eyebrow { font-family: var(--mono); font-size: .82rem; color: var(--ink-faint); margin-bottom: 20px; }
-.hero-text h1 { font-size: clamp(2rem,4.4vw,3.1rem); font-weight: 700; line-height: 1.18; letter-spacing: -.015em; color: var(--ink); text-wrap: balance; margin-bottom: 22px; }
+.hero-section { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; padding: 90px clamp(24px,5vw,80px) 60px; position: relative; overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px,5vw,64px); max-width: var(--maxw); margin: 0 auto; width: 100%; align-items: center; position: relative; z-index: 2; }
+.hero-eyebrow { font-family: var(--mono); font-size: .84rem; color: var(--ink-faint); margin-bottom: 22px; }
+.hero-text h1 { font-size: clamp(2.6rem,6vw,4.3rem); font-weight: 700; line-height: 1.06; letter-spacing: -.025em; color: var(--ink); text-wrap: balance; margin-bottom: 26px; }
+.hero-text h1 em { font-family: var(--serif); font-style: italic; font-weight: 500; color: var(--accent); }
+.hero-watermark { position: absolute; z-index: 1; top: 50%; right: -4%; transform: translateY(-50%); font-family: var(--mono); font-weight: 700; font-size: clamp(9rem,22vw,17rem); color: transparent; -webkit-text-stroke: 1px rgba(211,138,69,.14); letter-spacing: -.03em; pointer-events: none; user-select: none; line-height: 1; white-space: nowrap; }
 .hero-sub { font-size: 1rem; color: var(--ink-dim); max-width: 54ch; line-height: 1.75; margin-bottom: 32px; }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 .btn { font-family: var(--sans); font-weight: 600; font-size: .9rem; padding: 12px 22px; border-radius: 7px; border: 1px solid transparent; cursor: pointer; transition: all .2s ease; display: inline-flex; align-items: center; gap: 8px; }
@@ -158,6 +175,7 @@ body.vp-mobile .main-content, body.vp-compact .main-content { margin-left: 0; pa
 /* SKILLS */
 .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 36px; }
 .skill-group-name { font-family: var(--mono); font-size: .78rem; color: var(--accent); margin-bottom: 14px; }
+.skills-grid > div:nth-child(2) .skill-group-name { color: var(--accent2); }
 .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .skill-tag { font-size: .82rem; color: var(--ink-dim); padding: 6px 12px; border: 1px solid var(--border); border-radius: 5px; }
 
@@ -355,10 +373,11 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
 
   <!-- HERO -->
   <section class="hero-section" id="home">
+    <div class="hero-watermark" aria-hidden="true">N = P&times;Q</div>
     <div class="hero-grid">
       <div class="hero-text">
         <div class="hero-eyebrow mono">Sydney, Australia</div>
-        <h1>Most of what's on this page started as something that didn't work.</h1>
+        <h1>Most of what's on this page started as something that <em>didn't work</em>.</h1>
         <p class="hero-sub">Three things I've actually shipped: RSA factored by hand and on real IBM quantum hardware, a threshold-signature scheme built from a 2024 paper, and a task app that can't read your data even if it wanted to. The rest of my time goes to CTFs — mostly web and binary exploitation.</p>
         <div class="hero-btns">
           <a href="#projects" class="btn btn-primary"><iconify-icon icon="solar:folder-linear"></iconify-icon> See the work</a>
@@ -377,7 +396,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <!-- ABOUT -->
   <section class="section" id="about">
     <div class="section-eyebrow mono reveal">about</div>
-    <h2 class="reveal">Who's writing this</h2>
+    <h2 class="reveal">Who's writing <em>this</em></h2>
     <div class="about-grid" style="margin-top:36px;">
       <div class="code-panel reveal">
         <div class="code-panel-label">about.js</div>
@@ -404,7 +423,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <!-- EXPERIENCE -->
   <section class="section" id="experience">
     <div class="section-eyebrow mono reveal">experience</div>
-    <h2 class="reveal">Where I've worked</h2>
+    <h2 class="reveal">Where I've <em>worked</em></h2>
     <div style="margin-top:36px;">
       <div class="exp-item reveal">
         <div class="exp-top"><span class="exp-role">Integration Analyst Intern</span><span class="exp-dates mono">Apr 2026 – Jul 2026</span></div>
@@ -421,7 +440,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <!-- SKILLS -->
   <section class="section" id="skills">
     <div class="section-eyebrow mono reveal">skills</div>
-    <h2 class="reveal">What I actually use</h2>
+    <h2 class="reveal">What I actually <em>use</em></h2>
     <div class="skills-grid" style="margin-top:36px;">
       <div class="reveal">
         <div class="skill-group-name mono">Languages &amp; frameworks</div>
@@ -447,7 +466,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <!-- PROJECTS -->
   <section class="section" id="projects">
     <div class="section-eyebrow mono reveal">projects</div>
-    <h2 class="reveal">Projects that ship</h2>
+    <h2 class="reveal">Projects that <em>ship</em></h2>
 
     <div class="project-row reveal">
       <div class="project-head">
@@ -543,7 +562,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <!-- RSA CRACK WIDGET -->
   <section class="section" id="crack">
     <div class="section-eyebrow mono reveal">crack.py</div>
-    <h2 class="reveal">Break some RSA, right here</h2>
+    <h2 class="reveal">Break some <em>RSA</em>, right here</h2>
     <div class="panel reveal" style="margin-top:36px;">
       <div class="panel-body">
         <p class="crack-intro">This factors n and decrypts the ciphertext for real, in your browser — nothing is sent anywhere. It's slow on purpose past a few trillion: that gap between instant and not-in-your-lifetime is the entire reason RSA works. The prefilled example is a toy 12-bit key; find a stranger one somewhere on this site and paste it in.</p>
@@ -561,7 +580,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <!-- BLOG -->
   <section class="section" id="blog">
     <div class="section-eyebrow mono reveal">blog.log</div>
-    <h2 class="reveal">Notes from the field</h2>
+    <h2 class="reveal">Notes from the <em>field</em></h2>
     <div class="panel reveal" style="margin-top:36px;">
       <div class="blog-section-label">$ ls events/</div>
       <div class="events-list" id="eventsList"></div>
@@ -573,7 +592,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <!-- STATUS -->
   <section class="section" id="status">
     <div class="section-eyebrow mono reveal">status.sh</div>
-    <h2 class="reveal">Is it actually up</h2>
+    <h2 class="reveal">Is it actually <em>up</em></h2>
     <div class="panel reveal" style="margin-top:36px;">
       <div class="status-list" id="statusList"><div class="status-loading">checking...</div></div>
       <div class="status-note">Live check, not a claim — this backend actually pings each URL server-side on load. It runs on a free-tier dyno that sleeps when idle, so the first check after a quiet spell can take a few seconds while it wakes up, and history resets on a cold start.</div>
@@ -583,7 +602,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <!-- PLAYGROUND -->
   <section class="section" id="playground">
     <div class="section-eyebrow mono reveal">playground.sh</div>
-    <h2 class="reveal">Poke around a bit</h2>
+    <h2 class="reveal">Poke around <em>a bit</em></h2>
     <div class="panel reveal" id="funTerminal" style="margin-top:36px;">
       <div class="panel-label">guest@abhinav:~</div>
       <div class="fun-terminal-body" id="funTerminalBody">
@@ -599,7 +618,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <!-- CONTACT -->
   <section class="section" id="contact">
     <div class="section-eyebrow mono reveal">contact.sh</div>
-    <h2 class="reveal">Let's build something</h2>
+    <h2 class="reveal">Let's build <em>something</em></h2>
     <div class="contact-grid" style="margin-top:36px;">
       <div class="panel reveal">
         <div class="panel-label">message.sh</div>
