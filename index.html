@@ -156,11 +156,21 @@ body.vp-mobile .main-content, body.vp-compact .main-content { margin-left: 0; pa
 .code-panel-label { padding: 10px 16px; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); }
 .code-panel pre { padding: 20px 22px; font-family: var(--mono); font-size: .82rem; line-height: 1.85; overflow-x: auto; }
 .tok-kw { color: var(--accent); } .tok-str { color: #9fc98a; } .tok-var { color: #7fb7d6; } .tok-fn { color: #c99ee0; } .tok-cm { color: var(--ink-faint); font-style: italic; } .tok-prop { color: #e0c47f; }
-.about-stats { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; }
-.about-stat { display: flex; align-items: baseline; gap: 10px; font-size: .88rem; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
-.about-stat:last-child { border-bottom: none; }
-.about-stat strong { font-family: var(--mono); color: var(--accent); font-size: .95rem; min-width: 3.2ch; }
-.about-stat span { color: var(--ink-dim); }
+.stat-dash { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.stat-tile { background: var(--panel); padding: 22px 20px; }
+.stat-num { font-family: var(--mono); font-size: clamp(1.9rem,3.2vw,2.5rem); font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; letter-spacing: -.01em; line-height: 1; }
+.stat-tile:nth-child(2) .stat-num, .stat-tile:nth-child(4) .stat-num { color: var(--accent2); }
+.stat-label { margin-top: 8px; font-size: .8rem; color: var(--ink-dim); line-height: 1.5; }
+
+/* HERO LIVE STRIP */
+.hero-side { display: flex; flex-direction: column; gap: 14px; }
+.live-strip { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); font-size: .82rem; }
+.live-strip-label { color: var(--accent2); font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.live-strip-label::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: livepulse 1.8s ease-in-out infinite; }
+@keyframes livepulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+.live-strip-body { color: var(--ink-dim); }
+.live-strip-body strong { color: var(--ink); font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .live-strip-label::before { animation: none; } }
 
 /* EXPERIENCE */
 .exp-item { border-left: 2px solid var(--accent); padding: 4px 0 4px 22px; }
@@ -191,6 +201,9 @@ body.vp-mobile .main-content, body.vp-compact .main-content { margin-left: 0; pa
 .project-highlights li { font-size: .85rem; color: var(--ink-dim); line-height: 1.7; padding-left: 16px; position: relative; }
 .project-highlights li::before { content: "–"; position: absolute; left: 0; color: var(--ink-faint); }
 .project-side { display: flex; flex-direction: column; gap: 16px; }
+.project-metrics { display: flex; gap: 20px; flex-wrap: wrap; padding-bottom: 4px; }
+.project-metric-value { font-family: var(--mono); font-weight: 700; font-size: 1.15rem; color: var(--accent); line-height: 1.2; }
+.project-metric-label { font-size: .72rem; color: var(--ink-faint); margin-top: 2px; }
 .project-tags { display: flex; gap: 8px; flex-wrap: wrap; }
 .tag-item { font-size: .72rem; padding: 4px 10px; color: var(--ink-faint); border: 1px solid var(--border); border-radius: 4px; }
 .project-links { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -253,6 +266,9 @@ body.vp-mobile .main-content, body.vp-compact .main-content { margin-left: 0; pa
 .blog-full em { color: var(--ink); font-style: normal; }
 
 /* STATUS */
+.status-summary { display: flex; gap: 28px; flex-wrap: wrap; }
+.status-summary-item .val { font-family: var(--mono); font-weight: 700; font-size: clamp(1.7rem,2.8vw,2.2rem); color: var(--accent2); line-height: 1.15; }
+.status-summary-item .lbl { font-size: .78rem; color: var(--ink-dim); margin-top: 4px; }
 .status-list { padding: 4px 6px; }
 .status-row { display: flex; align-items: center; gap: 14px; padding: 13px 10px; border-bottom: 1px solid var(--border); }
 .status-row:last-child { border-bottom: none; }
@@ -384,10 +400,16 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
           <a href="#contact" class="btn btn-outline"><iconify-icon icon="solar:letter-linear"></iconify-icon> Get in touch</a>
         </div>
       </div>
-      <div class="terminal reveal">
-        <div class="terminal-label mono">whoami.sh</div>
-        <div class="terminal-body" id="terminalBody">
-          <div class="tline"><span class="prompt">$</span><span class="cmd">whoami</span></div>
+      <div class="hero-side">
+        <div class="terminal reveal">
+          <div class="terminal-label mono">whoami.sh</div>
+          <div class="terminal-body" id="terminalBody">
+            <div class="tline"><span class="prompt">$</span><span class="cmd">whoami</span></div>
+          </div>
+        </div>
+        <div class="live-strip reveal" id="heroLiveBar">
+          <span class="live-strip-label mono">live</span>
+          <span class="live-strip-body">checking systems...</span>
         </div>
       </div>
     </div>
@@ -411,11 +433,11 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <span class="tok-prop">currently</span>: <span class="tok-fn">shipping</span>(<span class="tok-str">"real, working systems"</span>)
 };</pre>
       </div>
-      <div class="about-stats reveal">
-        <div class="about-stat"><strong>03</strong><span>shipped products</span></div>
-        <div class="about-stat"><strong>10+</strong><span>vulnerability classes explored, hands-on</span></div>
-        <div class="about-stat"><strong>116+</strong><span>automated tests across those products</span></div>
-        <div class="about-stat"><strong>100%</strong><span>client-side encrypted — that's Haven, not a slogan</span></div>
+      <div class="stat-dash reveal">
+        <div class="stat-tile"><div class="stat-num" data-count-to="3">0</div><div class="stat-label">shipped products</div></div>
+        <div class="stat-tile"><div class="stat-num" data-count-to="10" data-suffix="+">0</div><div class="stat-label">vulnerability classes explored, hands-on</div></div>
+        <div class="stat-tile"><div class="stat-num" data-count-to="116" data-suffix="+">0</div><div class="stat-label">automated tests across those products</div></div>
+        <div class="stat-tile"><div class="stat-num" data-count-to="100" data-suffix="%">0</div><div class="stat-label">client-side encrypted — that's Haven, not a slogan</div></div>
       </div>
     </div>
   </section>
@@ -483,6 +505,11 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
           </ul>
         </div>
         <div class="project-side">
+          <div class="project-metrics">
+            <div><div class="project-metric-value">3</div><div class="project-metric-label">ways RSA got broken</div></div>
+            <div><div class="project-metric-value">Cirq</div><div class="project-metric-label">bit-exact validation</div></div>
+            <div><div class="project-metric-value">IBM</div><div class="project-metric-label">real quantum hardware</div></div>
+          </div>
           <div class="project-tags"><span class="tag-item">Python</span><span class="tag-item">React</span><span class="tag-item">FastAPI</span><span class="tag-item">Qiskit</span></div>
           <div class="project-links">
             <a class="project-link" href="https://crackrsa.com" target="_blank" rel="noopener"><iconify-icon icon="solar:link-linear"></iconify-icon> live</a>
@@ -513,6 +540,11 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
           </ul>
         </div>
         <div class="project-side">
+          <div class="project-metrics">
+            <div><div class="project-metric-value">k-of-n</div><div class="project-metric-label">threshold signing</div></div>
+            <div><div class="project-metric-value">0</div><div class="project-metric-label">elliptic curves used</div></div>
+            <div><div class="project-metric-value">Live</div><div class="project-metric-label">cross-tab via BroadcastChannel</div></div>
+          </div>
           <div class="project-tags"><span class="tag-item">Python</span><span class="tag-item">JavaScript</span><span class="tag-item">Merkle Trees</span></div>
           <div class="project-links">
             <a class="project-link" href="https://iabhi92.github.io/Crypto-Project/" target="_blank" rel="noopener"><iconify-icon icon="solar:link-linear"></iconify-icon> live</a>
@@ -543,6 +575,11 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
           </ul>
         </div>
         <div class="project-side">
+          <div class="project-metrics">
+            <div><div class="project-metric-value">600k</div><div class="project-metric-label">PBKDF2 iterations</div></div>
+            <div><div class="project-metric-value">AES-256</div><div class="project-metric-label">GCM encryption</div></div>
+            <div><div class="project-metric-value">0</div><div class="project-metric-label">plaintext bytes stored</div></div>
+          </div>
           <div class="project-tags"><span class="tag-item">JavaScript</span><span class="tag-item">Web Crypto API</span><span class="tag-item">Python</span></div>
           <div class="project-links">
             <a class="project-link" href="https://taskhavens.com" target="_blank" rel="noopener"><iconify-icon icon="solar:link-linear"></iconify-icon> live</a>
@@ -593,7 +630,8 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <section class="section" id="status">
     <div class="section-eyebrow mono reveal">status.sh</div>
     <h2 class="reveal">Is it actually <em>up</em></h2>
-    <div class="panel reveal" style="margin-top:36px;">
+    <div class="status-summary reveal" id="statusSummary"></div>
+    <div class="panel reveal" style="margin-top:20px;">
       <div class="status-list" id="statusList"><div class="status-loading">checking...</div></div>
       <div class="status-note">Live check, not a claim — this backend actually pings each URL server-side on load. It runs on a free-tier dyno that sleeps when idle, so the first check after a quiet spell can take a few seconds while it wakes up, and history resets on a cold start.</div>
     </div>
@@ -927,31 +965,78 @@ function sparklinePath(points) {
   const [lastX, lastY] = coords[coords.length - 1];
   return { w, h, line, fill, lastX, lastY };
 }
-async function loadStatus() {
+function renderStatusSummary(data) {
+  const el = document.getElementById('statusSummary');
+  const allPoints = Object.values(data.history).flat();
+  const upPoints = allPoints.filter(p => p.up);
+  const uptimePct = allPoints.length ? Math.round((upPoints.length / allPoints.length) * 100) : 100;
+  const latencies = data.current.filter(t => t.latency_ms != null).map(t => t.latency_ms);
+  const avg = latencies.length ? Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length) : null;
+  el.innerHTML = `
+    <div class="status-summary-item"><div class="val">${uptimePct}%</div><div class="lbl">uptime this session</div></div>
+    <div class="status-summary-item"><div class="val">${avg != null ? avg + 'ms' : '—'}</div><div class="lbl">average latency right now</div></div>
+    <div class="status-summary-item"><div class="val">${data.current.length}</div><div class="lbl">services actually checked</div></div>
+  `;
+}
+function renderStatusList(data) {
   const list = document.getElementById('statusList');
+  list.innerHTML = data.current.map(target => {
+    const hist = data.history[target.name] || [];
+    const spark = sparklinePath(hist);
+    const sparkSvg = spark
+      ? `<svg class="status-spark" width="${spark.w}" height="${spark.h}" viewBox="0 0 ${spark.w} ${spark.h}"><path class="fill" d="${spark.fill}"/><path class="line" d="${spark.line}"/><circle cx="${spark.lastX}" cy="${spark.lastY}" r="2"/></svg>`
+      : '';
+    return `
+      <div class="status-row">
+        <span class="status-pill ${target.up ? 'up' : 'down'}"><span class="dot2"></span>${target.up ? 'up' : 'down'}</span>
+        <span class="status-name">${target.name}</span>
+        ${sparkSvg}
+        <span class="status-latency">${target.latency_ms != null ? target.latency_ms + 'ms' : '—'}</span>
+      </div>`;
+  }).join('');
+}
+function renderHeroLiveBar(data) {
+  const bar = document.getElementById('heroLiveBar');
+  const upCount = data.current.filter(t => t.up).length;
+  const total = data.current.length;
+  const latencies = data.current.filter(t => t.latency_ms != null).map(t => t.latency_ms);
+  const avg = latencies.length ? Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length) : null;
+  bar.querySelector('.live-strip-body').innerHTML =
+    `<strong>${upCount}/${total}</strong> live systems up${avg != null ? `, averaging <strong>${avg}ms</strong>` : ''} — checked when this page loaded`;
+}
+async function loadStatus() {
   try {
     const res = await fetch('https://shors-rsa-cracker.onrender.com/api/status');
     if (!res.ok) throw new Error('bad response');
     const data = await res.json();
-    list.innerHTML = data.current.map(target => {
-      const hist = data.history[target.name] || [];
-      const spark = sparklinePath(hist);
-      const sparkSvg = spark
-        ? `<svg class="status-spark" width="${spark.w}" height="${spark.h}" viewBox="0 0 ${spark.w} ${spark.h}"><path class="fill" d="${spark.fill}"/><path class="line" d="${spark.line}"/><circle cx="${spark.lastX}" cy="${spark.lastY}" r="2"/></svg>`
-        : '';
-      return `
-        <div class="status-row">
-          <span class="status-pill ${target.up ? 'up' : 'down'}"><span class="dot2"></span>${target.up ? 'up' : 'down'}</span>
-          <span class="status-name">${target.name}</span>
-          ${sparkSvg}
-          <span class="status-latency">${target.latency_ms != null ? target.latency_ms + 'ms' : '—'}</span>
-        </div>`;
-    }).join('');
+    renderStatusList(data);
+    renderStatusSummary(data);
+    renderHeroLiveBar(data);
   } catch {
-    list.innerHTML = '<div class="status-loading">Couldn’t reach the status API just now — the free-tier backend may be waking up. Refresh in a moment.</div>';
+    document.getElementById('statusList').innerHTML = '<div class="status-loading">Couldn’t reach the status API just now — the free-tier backend may be waking up. Refresh in a moment.</div>';
+    document.getElementById('heroLiveBar').querySelector('.live-strip-body').textContent = 'Live systems check unavailable right now — the backend may be waking up.';
   }
 }
 loadStatus();
+
+/* ============ COUNT-UP STATS (real numbers, animated on scroll into view) ============ */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function animateCount(el) {
+  const target = Number(el.getAttribute('data-count-to'));
+  const suffix = el.getAttribute('data-suffix') || '';
+  if (reduceMotion) { el.textContent = target + suffix; return; }
+  const duration = 1200;
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target * eased) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const countIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { animateCount(e.target); countIO.unobserve(e.target); } }), { threshold: .4 });
+document.querySelectorAll('.stat-num[data-count-to]').forEach(el => countIO.observe(el));
 
 /* ============ PLAYGROUND TERMINAL (a real one, not just decorative) ============ */
 const TODO_LIST = [
