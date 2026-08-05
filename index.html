@@ -111,8 +111,8 @@ iconify-icon { display: inline-flex; vertical-align: middle; }
 .toggle-icon-close { display: none; }
 body.nav-open .toggle-icon-open { display: none; }
 body.nav-open .toggle-icon-close { display: inline-flex; }
-.mobile-nav { display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 999; background: var(--panel); border-bottom: 1px solid var(--border); padding: 10px clamp(24px,5vw,80px) 20px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: all .2s ease; }
-body.nav-open .mobile-nav { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.mobile-nav { display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0; z-index: 999; background: var(--bg); border-bottom: 1px solid var(--border); padding: 10px clamp(24px,5vw,80px) 20px; transform: translateY(-100%); pointer-events: none; transition: transform .25s cubic-bezier(.16,1,.3,1); overflow-y: auto; }
+body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .mobile-nav ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
 .mobile-nav a { display: block; padding: 11px 4px; color: var(--ink-dim); font-size: .9rem; border-bottom: 1px solid var(--border); }
 .mobile-nav li:last-child a { border-bottom: none; }
@@ -183,7 +183,7 @@ body.nav-open .mobile-nav { transform: translateY(0); opacity: 1; pointer-events
 }
 .code-panel { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .code-panel-label { padding: 10px 16px; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); }
-.code-panel pre { padding: 20px 22px; font-family: var(--mono); font-size: .82rem; line-height: 1.85; overflow-x: auto; }
+.code-panel pre { padding: 20px 22px; font-family: var(--mono); font-size: .82rem; line-height: 1.85; overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
 .tok-kw { color: var(--accent); } .tok-str { color: #9fc98a; } .tok-var { color: #7fb7d6; } .tok-fn { color: #c99ee0; } .tok-cm { color: var(--ink-faint); font-style: italic; } .tok-prop { color: #e0c47f; }
 .stat-dash { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .stat-tile { background: var(--panel); padding: 22px 20px; }
