@@ -27,33 +27,34 @@
 <meta name="twitter:title" content="Abhinav Kumar">
 <meta name="twitter:description" content="RSA factored by hand and on real IBM quantum hardware. Three shipped products, hands-on CTF work.">
 <link rel="canonical" href="https://iabhi92.online/">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Abhinav Kumar","url":"https://iabhi92.online/","email":"pinku2c@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Sydney","addressCountry":"AU"},"sameAs":["https://github.com/iabhi92","https://www.linkedin.com/in/iabhi92/"],"knowsAbout":["Full-Stack Development","Web Security","Cryptography","Binary Exploitation","Python","React"]}
 </script>
 <style>
 :root {
+  /* "Technical Noir" -- strictly monochromatic, one functional accent used sparingly. */
   --bg: #050608;
-  --bg-alt: #08090c;
-  --panel: #0d0f14;
-  --panel-2: #12151b;
-  --border: #21242e;
-  --ink: #f6f7f9;
-  --ink-dim: #98a0ae;
-  --ink-faint: #565d6b;
-  --accent: #3d8bff;
-  --accent-dim: #2f6bd1;
-  --accent-wash: rgba(61,139,255,.12);
-  --accent2: #2dd4a7;
-  --accent2-dim: #22a884;
-  --accent2-wash: rgba(45,212,167,.12);
-  --good: #34d399;
-  --bad: #f0655c;
+  --bg-alt: #08090b;
+  --panel: #0a0c10;
+  --panel-2: #16191f;
+  --border: #1f2229;
+  --ink: #ffffff;
+  --ink-dim: #9099a8;
+  --ink-faint: #4b5263;
+  --accent: #00ff41;
+  --accent-dim: #00b32e;
+  --accent-wash: rgba(0,255,65,.07);
+  --accent2: #00ff41;
+  --accent2-dim: #00b32e;
+  --accent2-wash: rgba(0,255,65,.07);
+  --good: #00ff41;
+  --bad: #ff3b30;
   --serif: "Source Serif 4", Georgia, serif;
-  --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --sans: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
-  --radius: 8px;
+  --radius: 0px;
   --maxw: 1180px;
   --sidebar-w: 240px;
   --sidebar-w-icon: 72px;
@@ -64,19 +65,20 @@
 html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--border) var(--bg); }
 html::-webkit-scrollbar { width: 8px; }
 html::-webkit-scrollbar-track { background: var(--bg); }
-html::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+html::-webkit-scrollbar-thumb { background: var(--border); border-radius: 0; }
 body {
   font-family: var(--sans); background: var(--bg); color: var(--ink); overflow-x: hidden; line-height: 1.5;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
   background-attachment: fixed;
 }
 
-/* AMBIENT BACKGROUND -- slow drifting color wash, replaces the old static gradient */
+/* AMBIENT BACKGROUND -- kept per request, recolored to the monochromatic + single-accent system (was blue/emerald/purple) */
+.tech-grid-bg { position: fixed; inset: 0; z-index: -2; pointer-events: none; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); background-size: 40px 40px; opacity: .35; }
 .ambient-glow { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-.orb { position: absolute; border-radius: 50%; filter: blur(90px); }
-.orb-1 { width: 46vw; height: 46vw; max-width: 620px; max-height: 620px; background: var(--accent); opacity: .16; top: -14%; left: -8%; animation: driftA 34s ease-in-out infinite alternate; }
-.orb-2 { width: 38vw; height: 38vw; max-width: 520px; max-height: 520px; background: var(--accent2); opacity: .13; top: 38%; right: -10%; animation: driftB 27s ease-in-out infinite alternate; }
-.orb-3 { width: 34vw; height: 34vw; max-width: 460px; max-height: 460px; background: #6d5fe0; opacity: .1; bottom: -12%; left: 28%; animation: driftC 40s ease-in-out infinite alternate; }
+.orb { position: absolute; border-radius: 0; filter: blur(90px); }
+.orb-1 { width: 46vw; height: 46vw; max-width: 620px; max-height: 620px; background: var(--accent); opacity: .1; top: -14%; left: -8%; animation: driftA 34s ease-in-out infinite alternate; }
+.orb-2 { width: 38vw; height: 38vw; max-width: 520px; max-height: 520px; background: var(--accent); opacity: .07; top: 38%; right: -10%; animation: driftB 27s ease-in-out infinite alternate; }
+.orb-3 { width: 34vw; height: 34vw; max-width: 460px; max-height: 460px; background: var(--ink-faint); opacity: .06; bottom: -12%; left: 28%; animation: driftC 40s ease-in-out infinite alternate; }
 @keyframes driftA { from { transform: translate(0,0) scale(1); } to { transform: translate(6vw,5vh) scale(1.12); } }
 @keyframes driftB { from { transform: translate(0,0) scale(1); } to { transform: translate(-5vw,4vh) scale(.92); } }
 @keyframes driftC { from { transform: translate(0,0) scale(1); } to { transform: translate(4vw,-5vh) scale(1.08); } }
@@ -87,12 +89,12 @@ body {
 body.spotlight-on .cursor-spotlight { opacity: 1; }
 @media (hover: none) { .cursor-spotlight { display: none; } }
 a { color: inherit; text-decoration: none; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 0; }
 .mono { font-family: var(--mono); }
 ::selection { background: var(--accent-wash); color: var(--ink); }
 .skip-link { position: absolute; left: -9999px; top: 0; z-index: 10001; background: var(--accent); color: #081018; padding: 10px 16px; border-radius: 0 0 8px 0; font-weight: 700; }
 .skip-link:focus { left: 0; }
-.back-to-top { position: fixed; right: 22px; bottom: 22px; z-index: 500; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--panel); border: 1px solid var(--border); color: var(--ink-dim); font-size: 1.15rem; opacity: 0; transform: translateY(8px); pointer-events: none; transition: all .25s ease; }
+.back-to-top { position: fixed; right: 22px; bottom: 22px; z-index: 500; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 0; background: var(--panel); border: 1px solid var(--border); color: var(--ink-dim); font-size: 1.15rem; opacity: 0; transform: translateY(8px); pointer-events: none; transition: all .25s ease; }
 .back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .back-to-top:hover { color: var(--accent); border-color: var(--accent-dim); }
 iconify-icon { display: inline-flex; vertical-align: middle; }
@@ -108,9 +110,9 @@ iconify-icon { display: inline-flex; vertical-align: middle; }
 .topbar-link:hover, .topbar-link.active { color: var(--ink); }
 .topbar-link.active::after { width: 100%; }
 .topbar-social { display: flex; align-items: center; gap: 10px; }
-.topbar-social .social-link { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; color: var(--ink-dim); transition: color .2s ease, transform .18s cubic-bezier(.34,1.56,.64,1); font-size: 1.05rem; }
+.topbar-social .social-link { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 0; color: var(--ink-dim); transition: color .2s ease, transform .18s cubic-bezier(.34,1.56,.64,1); font-size: 1.05rem; }
 .topbar-social .social-link:hover { color: var(--accent); transform: translateY(-2px) scale(1.08); }
-.topbar-toggle { display: none; width: 36px; height: 36px; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 7px; background: var(--panel-2); color: var(--ink-dim); cursor: pointer; }
+.topbar-toggle { display: none; width: 36px; height: 36px; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 0; background: var(--panel-2); color: var(--ink-dim); cursor: pointer; }
 .toggle-icon-close { display: none; }
 body.nav-open .toggle-icon-open { display: none; }
 body.nav-open .toggle-icon-close { display: inline-flex; }
@@ -131,7 +133,7 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .section { padding: var(--section-py) clamp(24px,5vw,80px); max-width: var(--maxw); margin: 0 auto; position: relative; }
 .section-eyebrow { font-family: var(--mono); font-size: .8rem; color: var(--accent); margin-bottom: 14px; letter-spacing: .02em; }
 .section:nth-of-type(even) .section-eyebrow { color: var(--accent2); }
-.section h2 { font-size: clamp(2rem,4.4vw,3rem); font-weight: 700; letter-spacing: -.015em; line-height: 1.15; color: var(--ink); max-width: 28ch; text-wrap: balance; }
+.section h2 { font-family: var(--serif); font-size: clamp(2rem,4.4vw,3rem); font-weight: 700; letter-spacing: -.015em; line-height: 1.15; color: var(--ink); max-width: 28ch; text-wrap: balance; }
 .section h2 em { font-family: var(--serif); font-style: italic; font-weight: 500; color: var(--accent); }
 .section:nth-of-type(even) h2 em { color: var(--accent2); }
 .section-intro { color: var(--ink-dim); max-width: 60ch; margin-top: 14px; font-size: 1rem; line-height: 1.7; }
@@ -158,13 +160,11 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .hero-watermark { position: absolute; z-index: 0; bottom: -18%; right: -12%; font-family: var(--mono); font-weight: 700; font-size: clamp(3.6rem,7.5vw,5.6rem); color: transparent; -webkit-text-stroke: 1.5px rgba(61,139,255,.5); letter-spacing: -.02em; pointer-events: none; user-select: none; line-height: 1; white-space: nowrap; }
 .hero-sub { font-size: 1.08rem; color: var(--ink-dim); max-width: 54ch; line-height: 1.75; margin-bottom: 32px; }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn { font-family: var(--sans); font-weight: 600; font-size: .9rem; padding: 12px 22px; border-radius: 7px; border: 1px solid transparent; cursor: pointer; transition: transform .18s cubic-bezier(.34,1.56,.64,1), background .2s ease, border-color .2s ease, box-shadow .2s ease; display: inline-flex; align-items: center; gap: 8px; }
-.btn-primary { background: var(--accent); color: #081018; }
-.btn-primary:hover { background: #64a4ff; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(61,139,255,.28); }
-.btn-primary:active { transform: translateY(0) scale(.97); }
-.btn-outline { background: transparent; color: var(--ink); border-color: var(--border); }
-.btn-outline:hover { border-color: var(--ink-dim); transform: translateY(-2px); }
-.btn-outline:active { transform: translateY(0) scale(.97); }
+.btn { font-family: var(--sans); font-weight: 700; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; padding: 12px 22px; border-radius: 0; border: 1px solid transparent; cursor: pointer; transition: background .18s ease, border-color .18s ease, color .18s ease; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary { background: var(--accent); color: #050608; }
+.btn-primary:hover { background: transparent; color: var(--accent); border-color: var(--accent); }
+.btn-outline { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-outline:hover { color: var(--accent); border-color: var(--accent); }
 
 .terminal { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .terminal-label { padding: 10px 16px; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); }
@@ -185,14 +185,9 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; overflow-x: auto; } }
 
 /* ABOUT */
-.about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 44px; align-items: start; }
-.code-panel { transform: rotate(-1.2deg); transition: transform .4s cubic-bezier(.16,1,.3,1); }
-.about-grid:hover .code-panel { transform: rotate(0deg); }
-.about-grid .stat-dash { margin-top: 70px; margin-left: -64px; position: relative; z-index: 2; box-shadow: 0 30px 70px rgba(0,0,0,.45); }
-@media (max-width:1024px) {
-  .code-panel { transform: none; }
-  .about-grid .stat-dash { margin-top: 0; margin-left: 0; box-shadow: none; }
-}
+.about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 0; align-items: stretch; }
+.about-grid .code-panel { border-right: none; }
+.about-grid .stat-dash { border-radius: 0; }
 .code-panel { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .code-panel-label { padding: 10px 16px; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); }
 .code-panel pre { padding: 20px 22px; font-family: var(--mono); font-size: .82rem; line-height: 1.85; overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
@@ -208,7 +203,7 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .hero-side .terminal, .hero-side .live-strip { position: relative; z-index: 1; }
 .live-strip { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); font-size: .82rem; }
 .live-strip-label { color: var(--accent2); font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; }
-.live-strip-label::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: livepulse 1.8s ease-in-out infinite; }
+.live-strip-label::before { content: ""; width: 6px; height: 6px; border-radius: 0; background: var(--accent2); animation: livepulse 1.8s ease-in-out infinite; }
 @keyframes livepulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
 .live-strip-body { color: var(--ink-dim); }
 .live-strip-body strong { color: var(--ink); font-weight: 600; }
@@ -227,7 +222,7 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 
 /* EXPERIENCE */
 .exp-item { border-left: 2px solid var(--accent); padding: 4px 0 4px 22px; position: relative; }
-.exp-item::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+.exp-item::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 0; background: var(--bg); border: 2px solid var(--accent); }
 .exp-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; margin-bottom: 4px; }
 .exp-role { font-size: 1.02rem; font-weight: 600; color: var(--ink); }
 .exp-dates { font-family: var(--mono); font-size: .74rem; color: var(--ink-faint); }
@@ -243,7 +238,7 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .skill-group-name { font-family: var(--mono); font-size: .78rem; color: var(--accent); flex: 0 0 150px; }
 .skills-grid > div:nth-child(2) .skill-group-name { color: var(--accent2); }
 .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; min-width: 200px; }
-.skill-tag { font-size: .82rem; color: var(--ink-dim); padding: 6px 12px; border: 1px solid var(--border); border-radius: 5px; transition: all .18s ease; }
+.skill-tag { font-size: .82rem; color: var(--ink-dim); padding: 6px 12px; border: 1px solid var(--border); border-radius: 0; transition: all .18s ease; }
 .skill-tag:hover { color: var(--ink); border-color: var(--accent-dim); background: var(--accent-wash); transform: translateY(-2px); }
 
 /* PROJECTS -- vertical editorial list, alternating asymmetric layout, not a card grid */
@@ -271,10 +266,10 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .project-metric-value { font-family: var(--mono); font-weight: 700; font-size: 1.15rem; color: var(--accent); line-height: 1.2; }
 .project-metric-label { font-size: .72rem; color: var(--ink-faint); margin-top: 2px; }
 .project-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-.tag-item { font-size: .72rem; padding: 4px 10px; color: var(--ink-faint); border: 1px solid var(--border); border-radius: 4px; transition: all .18s ease; }
+.tag-item { font-size: .72rem; padding: 4px 10px; color: var(--ink-faint); border: 1px solid var(--border); border-radius: 0; transition: all .18s ease; }
 .tag-item:hover { color: var(--ink); border-color: var(--accent-dim); }
 .project-links { display: flex; gap: 10px; flex-wrap: wrap; }
-.project-link { font-size: .82rem; color: var(--ink-dim); display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; transition: transform .18s cubic-bezier(.34,1.56,.64,1), color .2s ease, border-color .2s ease; }
+.project-link { font-size: .82rem; color: var(--ink-dim); display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border: 1px solid var(--border); border-radius: 0; transition: transform .18s cubic-bezier(.34,1.56,.64,1), color .2s ease, border-color .2s ease; }
 .project-link:hover { color: var(--accent); border-color: var(--accent-dim); transform: translateY(-2px); }
 .case-toggle { align-self: flex-start; font-family: var(--mono); font-size: .74rem; color: var(--ink-faint); background: none; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0; }
 .case-toggle:hover { color: var(--accent); }
@@ -292,27 +287,27 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .panel-body { padding: 22px 24px; }
 
 /* CRACK WIDGET -- the one loud, full-bleed moment on the page */
-.crack-band { position: relative; width: 100%; overflow: hidden; padding: var(--section-py) clamp(24px,5vw,80px); background: radial-gradient(ellipse 900px 600px at 85% 0%, rgba(255,255,255,.1), transparent 60%), linear-gradient(160deg, #1c4fe0 0%, #0c2a7a 100%); }
+.crack-band { position: relative; width: 100%; overflow: hidden; padding: var(--section-py) clamp(24px,5vw,80px); background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .crack-band-inner { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 2; }
-.crack-band-eyebrow { font-family: var(--mono); font-size: .82rem; color: rgba(255,255,255,.65); margin-bottom: 16px; }
-.crack-band h2 { font-size: clamp(2.4rem,5.4vw,3.8rem); font-weight: 700; line-height: 1.02; letter-spacing: -.02em; color: #fff; margin-bottom: 36px; max-width: none; }
-.crack-band h2 em { font-family: var(--serif); font-style: italic; font-weight: 500; color: #bfe0ff; }
+.crack-band-eyebrow { font-family: var(--mono); font-size: .82rem; color: var(--ink-faint); margin-bottom: 16px; }
+.crack-band h2 { font-family: var(--serif); font-size: clamp(2.4rem,5.4vw,3.8rem); font-weight: 700; line-height: 1.02; letter-spacing: -.02em; color: var(--ink); margin-bottom: 36px; max-width: none; }
+.crack-band h2 em { font-family: var(--serif); font-style: italic; font-weight: 500; color: var(--accent); }
 .crack-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start; }
-.crack-intro { font-size: .92rem; color: rgba(255,255,255,.78); line-height: 1.75; margin-bottom: 22px; }
+.crack-intro { font-size: .92rem; color: var(--ink-dim); line-height: 1.75; margin-bottom: 22px; }
 .crack-form { display: flex; flex-direction: column; gap: 14px; margin-bottom: 18px; }
 .crack-field { display: flex; flex-direction: column; gap: 6px; }
-.crack-field label { font-family: var(--mono); font-size: .68rem; letter-spacing: .04em; text-transform: uppercase; color: rgba(255,255,255,.6); }
-.crack-field input { background: rgba(0,0,0,.25); border: 1px solid rgba(255,255,255,.22); border-radius: 6px; padding: 10px 14px; color: #fff; font-family: var(--mono); font-size: .82rem; outline: none; transition: border-color .2s ease; }
-.crack-field input:focus { border-color: #fff; }
-.crack-band .btn-primary { background: #fff; color: #0c2a7a; }
-.crack-band .btn-primary:hover { background: #bfe0ff; }
-.crack-readout { background: rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.16); border-radius: var(--radius); padding: 20px 22px; min-height: 220px; backdrop-filter: blur(6px); }
-.crack-readout-label { font-family: var(--mono); font-size: .68rem; color: rgba(255,255,255,.55); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.crack-field label { font-family: var(--mono); font-size: .68rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-faint); }
+.crack-field input { background: var(--panel); border: 1px solid var(--border); border-radius: 0; padding: 10px 14px; color: var(--ink); font-family: var(--mono); font-size: .82rem; outline: none; transition: border-color .2s ease; }
+.crack-field input:focus { border-color: var(--accent); }
+.crack-band .btn-primary { background: var(--accent); color: var(--bg); }
+.crack-band .btn-primary:hover { background: var(--accent-dim); }
+.crack-readout { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; min-height: 220px; }
+.crack-readout-label { font-family: var(--mono); font-size: .68rem; color: var(--ink-faint); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
 .crack-output { font-family: var(--mono); font-size: .86rem; line-height: 1.9; min-height: 20px; }
-.crack-output .crack-line { padding: 3px 0; word-break: break-word; color: rgba(255,255,255,.8); }
-.crack-output .crack-ok { color: #bfe0ff; font-weight: 600; }
-.crack-output .crack-dim { color: rgba(255,255,255,.55); }
-.crack-output .crack-msg { color: #fff; font-weight: 700; font-size: 1.05rem; }
+.crack-output .crack-line { padding: 3px 0; word-break: break-word; color: var(--ink-dim); }
+.crack-output .crack-ok { color: var(--accent); font-weight: 600; }
+.crack-output .crack-dim { color: var(--ink-faint); }
+.crack-output .crack-msg { color: var(--ink); font-weight: 700; font-size: 1.05rem; }
 @media (max-width: 900px) { .crack-layout { grid-template-columns: 1fr; } }
 
 /* BLOG */
@@ -325,13 +320,13 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .blog-list { padding: 4px 6px 8px; }
 .blog-entry { border-bottom: 1px solid var(--border); }
 .blog-entry:last-child { border-bottom: none; }
-.blog-row { width: 100%; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 13px 14px; background: none; border: none; color: inherit; font-family: var(--mono); text-align: left; cursor: pointer; border-radius: 6px; transition: background .2s ease; }
+.blog-row { width: 100%; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 13px 14px; background: none; border: none; color: inherit; font-family: var(--mono); text-align: left; cursor: pointer; border-radius: 0; transition: background .2s ease; }
 .blog-row:hover { background: var(--panel-2); }
 .blog-cmd { font-size: .82rem; color: var(--ink); flex: 1; min-width: 220px; }
 .blog-cmd .prompt { color: var(--accent); }
 .blog-slug { color: var(--ink-dim); }
 .blog-meta { display: inline-flex; align-items: center; gap: 10px; font-size: .66rem; color: var(--ink-faint); flex-shrink: 0; }
-.blog-tag { padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border); white-space: nowrap; }
+.blog-tag { padding: 3px 9px; border-radius: 0; border: 1px solid var(--border); white-space: nowrap; }
 .blog-chevron { color: var(--ink-faint); transition: transform .2s ease; flex-shrink: 0; }
 .blog-row[aria-expanded="true"] .blog-chevron { transform: rotate(180deg); color: var(--accent); }
 .blog-body { display: none; padding: 0 18px 20px 34px; }
@@ -362,7 +357,7 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .contrib-wrap { margin-top: 32px; overflow-x: auto; }
 .contrib-label { font-size: .72rem; color: var(--ink-faint); margin-bottom: 12px; }
 .contrib-grid { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 11px); gap: 3px; width: max-content; }
-.contrib-cell { width: 11px; height: 11px; border-radius: 2px; background: var(--panel-2); }
+.contrib-cell { width: 11px; height: 11px; border-radius: 0; background: var(--panel-2); }
 .contrib-cell.l1 { background: rgba(45,212,167,.3); }
 .contrib-cell.l2 { background: rgba(45,212,167,.55); }
 .contrib-cell.l3 { background: rgba(45,212,167,.78); }
@@ -375,8 +370,8 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .status-list { padding: 4px 6px; }
 .status-row { display: flex; align-items: center; gap: 14px; padding: 13px 10px; border-bottom: 1px solid var(--border); }
 .status-row:last-child { border-bottom: none; }
-.status-pill { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: .66rem; text-transform: uppercase; letter-spacing: .04em; padding: 4px 10px; border-radius: 999px; flex-shrink: 0; }
-.status-pill .dot2 { width: 6px; height: 6px; border-radius: 50%; }
+.status-pill { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: .66rem; text-transform: uppercase; letter-spacing: .04em; padding: 4px 10px; border-radius: 0; flex-shrink: 0; }
+.status-pill .dot2 { width: 6px; height: 6px; border-radius: 0; }
 .status-pill.up { color: var(--good); background: rgba(76,175,125,.1); border: 1px solid rgba(76,175,125,.3); }
 .status-pill.up .dot2 { background: var(--good); }
 .status-pill.down { color: var(--bad); background: rgba(209,82,74,.1); border: 1px solid rgba(209,82,74,.3); }
@@ -406,7 +401,7 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .contact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; }
 .cli-form { display: flex; flex-direction: column; gap: 14px; }
 .field label { display: block; font-family: var(--mono); font-size: .68rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
-.field input, .field textarea { width: 100%; background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px; padding: 11px 14px; color: var(--ink); font-family: var(--sans); font-size: .88rem; outline: none; transition: border-color .2s ease; }
+.field input, .field textarea { width: 100%; background: var(--panel-2); border: 1px solid var(--border); border-radius: 0; padding: 11px 14px; color: var(--ink); font-family: var(--sans); font-size: .88rem; outline: none; transition: border-color .2s ease; }
 .field textarea { min-height: 110px; resize: vertical; }
 .field input:focus, .field textarea:focus { border-color: var(--accent); }
 .submit-btn { align-self: flex-start; }
@@ -417,14 +412,14 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .profile-card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; padding: 16px; color: var(--ink); border: 1px solid var(--border); border-radius: var(--radius); transition: border-color .2s ease, transform .2s ease; }
 .profile-card:hover { border-color: var(--accent-dim); transform: translateX(4px); }
 .profile-card:hover .profile-card-arrow { transform: translate(3px,-3px); }
-.profile-card-icon { width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center; color: var(--accent); background: var(--accent-wash); border-radius: 8px; font-size: 1.35rem; }
+.profile-card-icon { width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center; color: var(--accent); background: var(--accent-wash); border-radius: 0; font-size: 1.35rem; }
 .profile-card-content { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .profile-card-label { color: var(--ink-faint); font-size: .74rem; }
 .profile-card-content strong { color: var(--ink); font-size: .92rem; }
 .profile-card-arrow { color: var(--ink-faint); font-size: 1.15rem; transition: transform .2s ease; }
 .info-block { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; font-family: var(--mono); font-size: .8rem; line-height: 1.9; }
 .social-links { display: flex; gap: 10px; }
-.social-link { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; color: var(--ink-dim); font-size: 1.15rem; transition: color .2s ease, border-color .2s ease, transform .18s cubic-bezier(.34,1.56,.64,1); }
+.social-link { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; background: var(--panel); border: 1px solid var(--border); border-radius: 0; color: var(--ink-dim); font-size: 1.15rem; transition: color .2s ease, border-color .2s ease, transform .18s cubic-bezier(.34,1.56,.64,1); }
 .social-link:hover { color: var(--accent); border-color: var(--accent-dim); transform: translateY(-3px); }
 
 /* FOOTER */
@@ -451,6 +446,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
 </head>
 <body>
 
+<div class="tech-grid-bg" aria-hidden="true"></div>
 <div class="ambient-glow" aria-hidden="true">
   <span class="orb orb-1"></span>
   <span class="orb orb-2"></span>
@@ -503,7 +499,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
       <div class="hero-text">
         <div class="hero-eyebrow mono">Sydney, Australia</div>
         <h1>I build secure software. Then I <em>prove</em> it works.</h1>
-        <p class="hero-sub">I'm Abhinav Kumar, a software engineer focused on backend engineering, applied cryptography, and security. I build production systems, explore offensive security through CTFs, and enjoy understanding why software fails just as much as making it work.</p>
+        <p class="hero-sub">Sydney-based engineer. Backend, cryptography, and offensive security. I build production systems and then break them to find the gaps.</p>
         <div class="hero-btns">
           <a href="#projects" class="btn btn-primary"><iconify-icon icon="solar:folder-linear"></iconify-icon> View projects</a>
           <a href="resume.pdf" target="_blank" class="btn btn-outline"><iconify-icon icon="solar:file-text-linear"></iconify-icon> Resume</a>
@@ -590,22 +586,22 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
       <div class="philosophy-item reveal">
         <div class="philosophy-step mono">01</div>
         <h3>Build</h3>
-        <p>Start with the smallest thing that actually works.</p>
+        <p>Start small. Make it work.</p>
       </div>
       <div class="philosophy-item reveal">
         <div class="philosophy-step mono">02</div>
         <h3>Measure</h3>
-        <p>If it can't be tested, it isn't finished.</p>
+        <p>Untested is unfinished.</p>
       </div>
       <div class="philosophy-item reveal">
         <div class="philosophy-step mono">03</div>
         <h3>Break</h3>
-        <p>Understand how attackers, users, and reality will abuse it.</p>
+        <p>Abuse it before they do.</p>
       </div>
       <div class="philosophy-item reveal">
         <div class="philosophy-step mono">04</div>
         <h3>Improve</h3>
-        <p>Good software survives contact with real people.</p>
+        <p>Software survives contact with reality.</p>
       </div>
     </div>
   </section>
@@ -613,15 +609,16 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <!-- EXPERIENCE -->
   <section class="section" id="experience">
     <div class="section-eyebrow mono reveal">experience</div>
-    <h2 class="reveal">Where I've <em>worked</em></h2>
+    <h2 class="reveal">Experience &amp; <em>Methodology</em></h2>
+    <p class="section-intro reveal">A chronological record of operations and the core principles guiding my technical execution.</p>
     <div style="margin-top:36px;">
       <div class="exp-item reveal">
         <div class="exp-top"><span class="exp-role">Integration Analyst Intern</span><span class="exp-dates mono">Apr 2026 – Jul 2026</span></div>
         <div class="exp-company">iSoft Software Technologies Pty Ltd · Sydney</div>
         <ul class="exp-list">
-          <li>Validated REST API requests (GET, POST, PUT, DELETE) and authentication flows using API keys and tokens across integration builds.</li>
-          <li>Executed SQL queries to validate data integrity and supported data mapping between integrated applications.</li>
-          <li>Monitored API responses, identified errors and failures, and assisted in debugging integration issues, contributing to functional and quality-assurance testing cycles.</li>
+          <li>Verified REST/Auth flows under load.</li>
+          <li>SQL validation &amp; schema mapping for data integrity.</li>
+          <li>Live debugging of integration failures in production-ready cycles.</li>
         </ul>
       </div>
     </div>
@@ -657,7 +654,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
   <section class="section" id="projects">
     <div class="section-eyebrow mono reveal">projects</div>
     <h2 class="reveal">Projects that taught me <em>something</em></h2>
-    <p class="section-intro reveal">Not everything I've built belongs here. These do — each one because it forced me to actually understand something, not just use it.</p>
+    <p class="section-intro reveal">Each of these forced me to actually understand a system, not just use a library.</p>
 
     <div class="project-row reveal">
       <div class="project-visual" aria-hidden="true">
@@ -684,8 +681,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
           <span class="project-title">Shor's RSA Cracker</span>
           <span class="project-file mono">shors-rsa-cracker.py</span>
         </div>
-        <p class="project-summary">Factored RSA moduli by hand, then classically, then on IBM's real quantum hardware.</p>
-        <p class="project-why"><strong>Why:</strong> I wanted to understand why RSA actually breaks, not just read that it does.</p>
+        <p class="project-summary">Factored RSA by hand, then classically, then on IBM hardware. Why? To see where it actually breaks.</p>
         <ul class="project-highlights">
           <li>Built a quantum statevector simulator from scratch and checked it bit-for-bit against Google Cirq</li>
           <li>Ran actual period-finding on IBM quantum hardware, not just a simulator</li>
@@ -734,8 +730,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
           <span class="project-title">Threshold Signatures</span>
           <span class="project-file mono">threshold_signatures.py</span>
         </div>
-        <p class="project-summary">Kelsey, Lang &amp; Lucks published this threshold-signature scheme in 2024. I built it.</p>
-        <p class="project-why"><strong>Why:</strong> papers get a lot clearer once you've had to debug them.</p>
+        <p class="project-summary">k-of-n signatures with zero elliptic curves. Built from a 2024 paper to verify the theory in code.</p>
         <ul class="project-highlights">
           <li>Winternitz one-time signatures and Merkle trees, no elliptic curves or RSA anywhere</li>
           <li>k-of-n signing demoed across real separate browser tabs over BroadcastChannel</li>
@@ -784,8 +779,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
           <span class="project-title">Haven</span>
           <span class="project-file mono">haven.js</span>
         </div>
-        <p class="project-summary">Every task is encrypted before Haven's server ever sees it — and there's a page that proves exactly that.</p>
-        <p class="project-why"><strong>Why:</strong> I wanted to know what "zero-knowledge" actually means in practice, not just in a whitepaper.</p>
+        <p class="project-summary">Client-side encryption that doesn't just ask for trust. A "you vs. the server" panel proves the ciphertext.</p>
         <ul class="project-highlights">
           <li>AES-256-GCM client-side, key derived via PBKDF2-SHA256 at 600,000 iterations</li>
           <li>No account, works fully offline, nothing readable ever touches the network</li>
@@ -818,7 +812,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
       <h2 class="reveal">Paste a key.<br>Watch it <em>break</em>.</h2>
       <div class="crack-layout">
         <div class="reveal">
-          <p class="crack-intro">This factors n and decrypts the ciphertext for real, in your browser — nothing is sent anywhere. It's slow on purpose past a few trillion: that gap between instant and not-in-your-lifetime is the entire reason RSA works. The prefilled example is a toy 12-bit key; find a stranger one somewhere on this site and paste it in.</p>
+          <p class="crack-intro">Factor and decrypt in the browser. No data leaves your machine. This is slow by design — the gap between instant and never is why RSA works. The prefilled example is a toy 12-bit key; find a sterner one elsewhere on this site and paste it in.</p>
           <div class="crack-form">
             <div class="crack-field"><label for="crackN">n</label><input type="text" id="crackN" value="3233" inputmode="numeric" autocomplete="off"></div>
             <div class="crack-field"><label for="crackE">e</label><input type="text" id="crackE" value="17" inputmode="numeric" autocomplete="off"></div>
@@ -853,11 +847,11 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
     <div class="mindshift-list" style="margin-top:36px;">
       <div class="mindshift-item reveal">
         <div class="mindshift-col"><span class="mindshift-label">I used to think</span><p>AES was the hard part of secure software.</p></div>
-        <div class="mindshift-col mindshift-after"><span class="mindshift-label">I learned</span><p>Key management, recovery, UX, and threat modelling are where the real work begins.</p></div>
+        <div class="mindshift-col mindshift-after"><span class="mindshift-label">I learned</span><p>Key management is the real fight.</p></div>
       </div>
       <div class="mindshift-item reveal">
         <div class="mindshift-col"><span class="mindshift-label">I used to think</span><p>Reading a cryptography paper meant understanding it.</p></div>
-        <div class="mindshift-col mindshift-after"><span class="mindshift-label">I learned</span><p>Implementing it reveals every assumption the paper quietly skips.</p></div>
+        <div class="mindshift-col mindshift-after"><span class="mindshift-label">I learned</span><p>Implementation reveals the hidden assumptions.</p></div>
       </div>
       <div class="mindshift-item reveal">
         <div class="mindshift-col"><span class="mindshift-label">I used to think</span><p>A quantum computer would make short work of real RSA keys.</p></div>
@@ -897,11 +891,12 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
 
   <!-- PLAYGROUND -->
   <section class="section" id="playground">
-    <div class="section-eyebrow mono reveal">playground.sh</div>
-    <h2 class="reveal">Poke around <em>a bit</em></h2>
+    <div class="section-eyebrow mono reveal" style="color:var(--bad);">● Restricted Access. Experimental modules only.</div>
+    <h2 class="reveal" style="font-family:var(--mono);">SEC_PLAYGROUND_<span class="tcursor">▋</span></h2>
     <div class="panel reveal" id="funTerminal" style="margin-top:36px;">
-      <div class="panel-label">guest@abhinav:~</div>
+      <div class="panel-label">root@sec_eng:/dev/null$</div>
       <div class="fun-terminal-body" id="funTerminalBody">
+        <div class="fline out">// LOCAL_ENVIRONMENT_V2.4.0</div>
         <div class="fline out">This one actually runs. Type <span class="cmd">help</span> to see what it does — or just try <span class="cmd">todo</span>.</div>
       </div>
       <div class="fun-terminal-input-row">
@@ -1110,15 +1105,15 @@ updateActiveNav();
 const terminalBody = document.getElementById('terminalBody');
 const TERMINAL_SCRIPT = [
   { type: 'command', text: 'whoami' },
-  { type: 'output', text: 'Abhinav Kumar, Sydney' },
-  { type: 'command', text: 'cat mission.txt' },
-  { type: 'output', text: 'No mission statement. Just things that work, and receipts to prove it.' },
+  { type: 'output', text: '> IDENTITY VERIFIED: Abhinav Kumar' },
+  { type: 'output', text: '> ROLES: Security Engineer | Backend Dev' },
+  { type: 'output', text: '> STATUS: ONLINE' },
   { type: 'command', text: './ship.sh --projects' },
   { type: 'output', text: '✓ crackrsa.com — RSA cracked with a real quantum sim' },
   { type: 'output', text: '✓ threshold signatures — Winternitz OTS + Merkle trees' },
   { type: 'output', text: '✓ taskhavens.com — AES-256-GCM, client-side, always' },
   { type: 'command', text: 'echo $STATUS' },
-  { type: 'output', text: 'looking for my next role', final: true },
+  { type: 'output', text: 'live checking systems', final: true },
 ];
 async function typeLine(text, el){
   for (let i = 0; i <= text.length; i++) { el.textContent = text.slice(0, i); await new Promise(r => setTimeout(r, 18)); }
