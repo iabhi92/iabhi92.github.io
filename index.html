@@ -34,11 +34,11 @@
 </script>
 <style>
 :root {
-  --bg: #0a0c10;
-  --bg-alt: #0d1015;
-  --panel: #12151b;
-  --panel-2: #161a22;
-  --border: #262b35;
+  --bg: #050608;
+  --bg-alt: #08090c;
+  --panel: #0d0f14;
+  --panel-2: #12151b;
+  --border: #21242e;
   --ink: #f6f7f9;
   --ink-dim: #98a0ae;
   --ink-faint: #565d6b;
@@ -150,6 +150,7 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 
 /* HERO */
 .hero-section { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; padding: 90px clamp(24px,5vw,80px) 60px; position: relative; overflow: hidden; }
+#starfield { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px,5vw,64px); max-width: var(--maxw); margin: 0 auto; width: 100%; align-items: center; position: relative; z-index: 2; }
 .hero-eyebrow { font-family: var(--mono); font-size: .84rem; color: var(--ink-faint); margin-bottom: 22px; }
 .hero-text h1 { font-size: clamp(3.2rem,8.5vw,6.4rem); font-weight: 700; line-height: .98; letter-spacing: -.035em; color: var(--ink); text-wrap: balance; margin-bottom: 30px; }
@@ -174,6 +175,14 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .tline.out { color: var(--ink-dim); padding-left: 16px; }
 .tcursor { color: var(--accent); animation: blink 1s step-end infinite; }
 @keyframes blink { 50% { opacity: 0; } }
+
+/* MARQUEE */
+.marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 18px 0; background: var(--bg-alt); white-space: nowrap; }
+.marquee-track { display: inline-flex; align-items: center; animation: marquee 38s linear infinite; }
+.marquee-item { font-family: var(--mono); font-size: .82rem; color: var(--ink-dim); padding: 0 10px; }
+.marquee-sep { color: var(--accent); opacity: .5; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; overflow-x: auto; } }
 
 /* ABOUT */
 .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 44px; align-items: start; }
@@ -344,6 +353,21 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .mindshift-col p { font-size: .92rem; color: var(--ink); line-height: 1.6; }
 @media (max-width:640px) { .mindshift-item { grid-template-columns: 1fr; } }
 
+/* GITHUB ACTIVITY */
+.gh-layout { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.gh-stats { display: flex; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.gh-stat { background: var(--panel); padding: 20px 26px; }
+.gh-num { font-family: var(--mono); font-size: clamp(1.8rem,2.8vw,2.3rem); font-weight: 700; color: var(--accent2); line-height: 1; font-variant-numeric: tabular-nums; }
+.gh-label { font-size: .76rem; color: var(--ink-dim); margin-top: 6px; }
+.contrib-wrap { margin-top: 32px; overflow-x: auto; }
+.contrib-label { font-size: .72rem; color: var(--ink-faint); margin-bottom: 12px; }
+.contrib-grid { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 11px); gap: 3px; width: max-content; }
+.contrib-cell { width: 11px; height: 11px; border-radius: 2px; background: var(--panel-2); }
+.contrib-cell.l1 { background: rgba(45,212,167,.3); }
+.contrib-cell.l2 { background: rgba(45,212,167,.55); }
+.contrib-cell.l3 { background: rgba(45,212,167,.78); }
+.contrib-cell.l4 { background: var(--accent2); }
+
 /* STATUS */
 .status-summary { display: flex; gap: 28px; flex-wrap: wrap; }
 .status-summary-item .val { font-family: var(--mono); font-weight: 700; font-size: clamp(1.7rem,2.8vw,2.2rem); color: var(--accent2); line-height: 1.15; }
@@ -474,6 +498,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
 
   <!-- HERO -->
   <section class="hero-section" id="home">
+    <canvas id="starfield" aria-hidden="true"></canvas>
     <div class="hero-grid">
       <div class="hero-text">
         <div class="hero-eyebrow mono">Sydney, Australia</div>
@@ -500,6 +525,34 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
       </div>
     </div>
   </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">RSA</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Shor's Algorithm</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">AES-256-GCM</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Merkle Trees</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Winternitz Signatures</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Qiskit</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Web Crypto API</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Python</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">React / TypeScript</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">FastAPI</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Binary Exploitation</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">RSA</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Shor's Algorithm</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">AES-256-GCM</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Merkle Trees</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Winternitz Signatures</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Qiskit</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Web Crypto API</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Python</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">React / TypeScript</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">FastAPI</span><span class="marquee-sep">/</span>
+      <span class="marquee-item">Binary Exploitation</span><span class="marquee-sep">/</span>
+    </div>
+  </div>
 
   <!-- ABOUT -->
   <section class="section" id="about">
@@ -813,6 +866,24 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
     </div>
   </section>
 
+  <!-- GITHUB ACTIVITY -->
+  <section class="section" id="activity">
+    <div class="section-eyebrow mono reveal">github</div>
+    <h2 class="reveal">Code I've put into <em>the world</em></h2>
+    <div class="gh-layout reveal" style="margin-top:36px;">
+      <div class="gh-stats" id="ghStats">
+        <div class="gh-stat"><div class="gh-num" id="ghRepos">—</div><div class="gh-label">public repos</div></div>
+        <div class="gh-stat"><div class="gh-num" id="ghFollowers">—</div><div class="gh-label">followers</div></div>
+        <div class="gh-stat"><div class="gh-num" id="ghYear">—</div><div class="gh-label">contributions, last 12 months</div></div>
+      </div>
+      <a href="https://github.com/iabhi92" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="align-self:flex-start;"><iconify-icon icon="mdi:github"></iconify-icon> View GitHub profile</a>
+    </div>
+    <div class="contrib-wrap reveal">
+      <div class="contrib-label mono" id="contribLabel">loading real contribution history...</div>
+      <div class="contrib-grid" id="contribGrid"></div>
+    </div>
+  </section>
+
   <!-- STATUS -->
   <section class="section" id="status">
     <div class="section-eyebrow mono reveal">status.sh</div>
@@ -912,6 +983,96 @@ if (window.matchMedia('(hover: hover)').matches && !window.matchMedia('(prefers-
     spotlightTimer = setTimeout(() => document.body.classList.remove('spotlight-on'), 2200);
   }, { passive: true });
 }
+
+/* ============ STARFIELD (hero-scoped, canvas 2D -- see commit message for why not WebGL/shaders) ============ */
+(function () {
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const COLORS = ['174,246,207', '95,230,160', '234,255,242']; // mint, jade, bone
+  const COUNT = 260;
+  let w, h, stars, mx = 0, my = 0, targetMx = 0, targetMy = 0, roll = 0, scrollBoost = 0;
+
+  function resize() {
+    w = canvas.width = canvas.offsetWidth * devicePixelRatio;
+    h = canvas.height = canvas.offsetHeight * devicePixelRatio;
+  }
+  function makeStar() {
+    return {
+      x: (Math.random() - 0.5) * w * 1.4,
+      y: (Math.random() - 0.5) * h * 1.4,
+      z: Math.random() * w,
+      r: 0.6 + Math.random() * 1.8,
+      phase: Math.random() * Math.PI * 2,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    };
+  }
+  function init() {
+    resize();
+    stars = Array.from({ length: COUNT }, makeStar);
+  }
+  init();
+  window.addEventListener('resize', init);
+
+  canvas.parentElement.addEventListener('mousemove', e => {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    targetMx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    targetMy = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+  });
+  window.addEventListener('scroll', () => {
+    scrollBoost = Math.min(4, window.scrollY / 200);
+  }, { passive: true });
+
+  if (reduceMotion) {
+    // Static field, no animation loop, no motion at all.
+    ctx.fillStyle = '#000';
+    stars.forEach(s => {
+      const scale = w / s.z;
+      const sx = w / 2 + s.x * scale * 0.3;
+      const sy = h / 2 + s.y * scale * 0.3;
+      ctx.fillStyle = `rgba(${s.color},.5)`;
+      ctx.beginPath();
+      ctx.arc(sx, sy, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    return;
+  }
+
+  let t = 0;
+  function tick() {
+    t += 0.016;
+    mx += (targetMx - mx) * 0.04;
+    my += (targetMy - my) * 0.04;
+    roll += 0.0006 + scrollBoost * 0.0004;
+    scrollBoost *= 0.94;
+    const drift = (1.1 + scrollBoost) * (w / 700);
+
+    ctx.clearRect(0, 0, w, h);
+    const cx = w / 2 + mx * w * 0.03;
+    const cy = h / 2 + my * h * 0.03;
+    const cosR = Math.cos(roll), sinR = Math.sin(roll);
+
+    for (const s of stars) {
+      s.z -= drift;
+      if (s.z <= 1) { Object.assign(s, makeStar()); s.z = w; }
+      const scale = (w * 0.5) / s.z;
+      let px = s.x * scale, py = s.y * scale;
+      const rx = px * cosR - py * sinR;
+      const ry = px * sinR + py * cosR;
+      const sx = cx + rx, sy = cy + ry;
+      if (sx < -20 || sx > w + 20 || sy < -20 || sy > h + 20) continue;
+      const twinkle = 0.55 + 0.45 * Math.sin(t * 1.6 + s.phase * 6.283);
+      const size = Math.min(4, s.r * scale * 0.9);
+      const alpha = Math.min(0.95, twinkle * scale * 0.5);
+      ctx.fillStyle = `rgba(${s.color},${alpha})`;
+      ctx.beginPath();
+      ctx.arc(sx, sy, Math.max(0.4, size), 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
 
 /* ============ HERO PARALLAX (watermark drifts slower than scroll) ============ */
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -1146,6 +1307,33 @@ eventsListEl.innerHTML = EVENTS.map(ev => `
     <span class="event-meta mono">${ev.meta}</span>
     <span class="event-desc">${ev.desc}</span>
   </div>`).join('');
+
+/* ============ GITHUB ACTIVITY (real API data -- no fabricated stats) ============ */
+async function loadGitHub() {
+  try {
+    const res = await fetch('https://api.github.com/users/iabhi92');
+    if (res.ok) {
+      const data = await res.json();
+      document.getElementById('ghRepos').textContent = data.public_repos ?? '—';
+      document.getElementById('ghFollowers').textContent = data.followers ?? '—';
+    }
+  } catch {
+    /* leave placeholders -- no fabricated numbers */
+  }
+  try {
+    const res = await fetch('https://github-contributions-api.jogruber.de/v4/iabhi92?y=last');
+    if (!res.ok) throw new Error('bad response');
+    const data = await res.json();
+    document.getElementById('ghYear').textContent = data.total?.lastYear ?? '—';
+    const days = data.contributions || [];
+    const grid = document.getElementById('contribGrid');
+    grid.innerHTML = days.map(d => `<div class="contrib-cell l${d.level}" title="${d.date}: ${d.count} contributions"></div>`).join('');
+    document.getElementById('contribLabel').textContent = `real contribution history, last 12 months (${data.total?.lastYear ?? 0} total)`;
+  } catch {
+    document.getElementById('contribLabel').textContent = 'contribution history unavailable right now — see the live profile instead';
+  }
+}
+loadGitHub();
 
 /* ============ STATUS WIDGET (real live check, fetched from the crackrsa.com backend) ============ */
 function sparklinePath(points) {
