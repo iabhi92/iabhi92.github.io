@@ -238,7 +238,7 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .project-row::after { bottom: -1px; right: -1px; border-bottom: 1px solid var(--accent); border-right: 1px solid var(--accent); }
 .project-row:hover::before, .project-row:hover::after { opacity: 1; }
 .project-visual { position: relative; overflow: hidden; border-right: 1px solid var(--border); min-height: 260px; }
-.project-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.project-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; background: var(--bg-alt); }
 @media (hover: hover) {
   .project-visual img { filter: grayscale(1); opacity: .55; transition: filter .4s ease, opacity .4s ease; }
   .project-row:hover .project-visual img { filter: grayscale(0); opacity: 1; }
@@ -636,7 +636,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
 
     <div class="project-row reveal">
       <div class="project-visual">
-        <img src="assets/projects/crackrsa.png" alt="crackrsa.com homepage: Shor's Algorithm vs. RSA, live terminal running a real factoring API call" loading="lazy" width="800" height="562">
+        <img src="assets/projects/crackrsa.webp" alt="crackrsa.com homepage: Shor's Algorithm vs. RSA, live terminal running a real factoring API call" loading="lazy" width="1376" height="768">
         <div class="project-visual-grid" aria-hidden="true"></div>
         <div class="project-status-badge"><span class="dot"></span> LIVE</div>
       </div>
@@ -660,7 +660,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
 
     <div class="project-row reveal">
       <div class="project-visual">
-        <img src="assets/projects/threshold.png" alt="Distributed Hash-Based Threshold Signatures demo page, live SHA-256 benchmark counter running in-browser" loading="lazy" width="800" height="562">
+        <img src="assets/projects/threshold.webp" alt="Distributed Hash-Based Threshold Signatures title card" loading="lazy" width="1376" height="768">
         <div class="project-visual-grid" aria-hidden="true"></div>
         <div class="project-status-badge"><span class="dot"></span> LIVE</div>
       </div>
@@ -684,7 +684,7 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
 
     <div class="project-row reveal">
       <div class="project-visual">
-        <img src="assets/projects/haven.png" alt="Haven homepage: private, local-first task manager, 'Your tasks. Stay yours.' hero with the live app screenshot" loading="lazy" width="800" height="562">
+        <img src="assets/projects/haven.webp" alt="Haven title card: 'Your tasks. Stay yours.'" loading="lazy" width="1376" height="768">
         <div class="project-visual-grid" aria-hidden="true"></div>
         <div class="project-status-badge"><span class="dot"></span> LIVE</div>
       </div>
