@@ -98,9 +98,9 @@ iconify-icon { display: inline-flex; vertical-align: middle; }
 .topbar-link:hover, .topbar-link.active { color: var(--ink); }
 .topbar-link.active::after { width: 100%; }
 .topbar-social { display: flex; align-items: center; gap: 10px; }
-.topbar-social .social-link { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 0; color: var(--ink-dim); transition: color .2s ease, transform .18s cubic-bezier(.34,1.56,.64,1); font-size: 1.05rem; }
+.topbar-social .social-link { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 0; color: var(--ink-dim); transition: color .2s ease, transform .18s cubic-bezier(.34,1.56,.64,1); font-size: 1.05rem; }
 .topbar-social .social-link:hover { color: var(--accent); transform: translateY(-2px) scale(1.08); }
-.topbar-toggle { display: none; width: 36px; height: 36px; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 0; background: var(--panel-2); color: var(--ink-dim); cursor: pointer; }
+.topbar-toggle { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 0; background: var(--panel-2); color: var(--ink-dim); cursor: pointer; }
 .toggle-icon-close { display: none; }
 body.nav-open .toggle-icon-open { display: none; }
 body.nav-open .toggle-icon-close { display: inline-flex; }
@@ -386,6 +386,7 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .contact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; }
 .cli-form { display: flex; flex-direction: column; gap: 14px; }
 .field label { display: block; font-family: var(--mono); font-size: .68rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+.field label .req { color: var(--accent); }
 .field input, .field textarea { width: 100%; background: var(--panel-2); border: 1px solid var(--border); border-radius: 0; padding: 11px 14px; color: var(--ink); font-family: var(--sans); font-size: .88rem; outline: none; transition: border-color .2s ease; }
 .field textarea { min-height: 110px; resize: vertical; }
 .field input:focus, .field textarea:focus { border-color: var(--accent); }
@@ -816,9 +817,9 @@ footer.site-footer { padding: 28px clamp(24px,5vw,80px) 34px; border-top: 1px so
         <div class="panel-label">message.sh</div>
         <div class="panel-body">
           <form class="cli-form" id="contactForm" action="https://formspree.io/f/xjybbzdn" method="POST">
-            <div class="field"><label for="name">Name</label><input type="text" id="name" name="name" placeholder="Your name" required></div>
-            <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="you@example.com" required></div>
-            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="What's this about?" required></textarea></div>
+            <div class="field"><label for="name">Name <span class="req">*</span></label><input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" required></div>
+            <div class="field"><label for="email">Email <span class="req">*</span></label><input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required></div>
+            <div class="field"><label for="message">Message <span class="req">*</span></label><textarea id="message" name="message" placeholder="What's this about?" required></textarea></div>
             <button type="submit" class="btn btn-primary submit-btn"><iconify-icon icon="solar:plain-2-linear"></iconify-icon> Send message</button>
             <div id="form-response" class="form-response"></div>
           </form>
