@@ -229,15 +229,15 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .skill-tag { font-size: .82rem; color: var(--ink-dim); padding: 6px 12px; border: 1px solid var(--border); border-radius: 0; transition: all .18s ease; }
 .skill-tag:hover { color: var(--ink); border-color: var(--accent-dim); background: var(--accent-wash); transform: translateY(-2px); }
 
-/* PROJECTS -- dossier cards: real screenshot left, breakdown right, corner brackets on hover */
-.project-row { border: 1px solid var(--border); background: var(--panel); position: relative; transition: border-color .3s ease; display: grid; grid-template-columns: 2fr 3fr; align-items: start; }
+/* PROJECTS -- dossier cards: real screenshot banner on top, breakdown below, corner brackets on hover */
+.project-row { border: 1px solid var(--border); background: var(--panel); position: relative; transition: border-color .3s ease; display: block; }
 .project-row + .project-row { margin-top: 32px; }
 .project-row:hover { border-color: var(--accent); }
 .project-row::before, .project-row::after { content: ""; position: absolute; width: 10px; height: 10px; opacity: 0; transition: opacity .3s ease; pointer-events: none; z-index: 2; }
 .project-row::before { top: -1px; left: -1px; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent); }
 .project-row::after { bottom: -1px; right: -1px; border-bottom: 1px solid var(--accent); border-right: 1px solid var(--accent); }
 .project-row:hover::before, .project-row:hover::after { opacity: 1; }
-.project-visual { position: relative; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 1376 / 768; background: var(--bg-alt); }
+.project-visual { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); aspect-ratio: 1376 / 768; }
 .project-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 @media (hover: hover) {
   .project-visual img { filter: grayscale(1); opacity: .55; transition: filter .4s ease, opacity .4s ease; }
@@ -260,8 +260,7 @@ body.nav-open .mobile-nav { transform: translateY(0); pointer-events: auto; }
 .project-breakdown p { font-size: .8rem; line-height: 1.7; color: var(--ink-dim); }
 .project-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
 .project-links .btn { flex: 1; justify-content: center; }
-@media (max-width: 860px) {
-  .project-row { grid-template-columns: 1fr; }
+@media (max-width: 700px) {
   .project-breakdown { grid-template-columns: 1fr; }
 }
 
